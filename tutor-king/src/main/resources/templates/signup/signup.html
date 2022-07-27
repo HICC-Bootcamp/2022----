@@ -7,97 +7,96 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup</title>
 
-  <!-- Bootstrap CSS -->
-  <link href="signup.css" th:href="@{signup.css}" rel="stylesheet">
+  <link href="/static/css/signup/signup.css" th:href="@{/static/css/signup/signup.css}" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
-  <div class="container">
-    <div class="input-form-backgroud row">
-      <div class="input-form col-md-6 mx-auto">
-        <h4 class="text-center">회원가입</h4>
-        <div class="text-center">
-            <input type="radio" name="role" id="role1" value="student" th:field="*{role}">
-            <label for="role1">학생</label>
-            <input type="radio" name="role" id="role2" value="teacher" th:field="*{role}">
-            <label for="role2">선생님</label>
-        </div>
-        <form class="validation-form" novalidate>
-            <div class="mb-3">
-              <label for="username">ID</label>
-              <div class="input-group mb-3">
-              <input type="text" class="form-control" id="userId" th:field="*{userId}" placeholder="ID를 입력해주세요." required>
-              <button class="btn btn-outline-secondary" type="button">중복확인</button>
-            </div>
-              <div class="invalid-feedback">
-                ID을 입력해주세요.
-              </div>
-            </div>
-
-          <div class="mb-3">
-            <label for="password">비밀번호</label>
-            <input type="text" class="form-control" id="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요." required>
-            <div class="invalid-feedback">
-              비밀번호를 입력해주세요.
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="passwordCheck">비밀번호 확인</label>
-            <input type="text" class="form-control" id="passwordCheck" th:field="*{passwordCheck}" placeholder="비밀번호를 확인해주세요." required>
-            <div class="invalid-feedback">
-              비밀번호를 다시 확인해주세요.
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="name">이름(실명)</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="이름(실명)을 입력해주세요." required>
-            <div class="invalid-feedback">
-              이름을 입력해주세요.
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <label for="name">전화번호</label>
-            <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" placeholder="전화번호를 입력해주세요." required>
-            <div class="invalid-feedback">
-              전화번호를 입력해주세요.
-            </div>
-          </div>
-
-          <div class="mb-4"></div>
-          <button class="btn btn-primary btn-lg btn-block" type="submit">다음</button>
-          <div class="mb-4"></div>
-          <button class="btn btn-outline-secondary btn-lg btn-block" onClick="location.href='../login/login.html'" th:onClick="|location.href='@{../login/login.html}'|">이전</button>
-        </form>
+<div class="container">
+  <div class="input-form-background row">
+    <div class="input-form col-md-6 mx-auto">
+      <h4 class="text-center">회원가입</h4>
+      <div class="text-center">
+        <input type="radio" name="type" id="type1" value="student" th:field="*{type}">
+        <label for="role1">학생</label>
+        <input type="radio" name="type" id="type2" value="teacher" th:field="*{type}">
+        <label for="role2">선생님</label>
       </div>
+      <form class="validation-form" novalidate>
+        <div class="mb-3">
+          <label for="userEmail">Email</label>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email을 입력해주세요." required>
+            <button class="btn btn-outline-secondary" type="button">중복확인</button>
+          </div>
+          <div class="invalid-feedback">
+            Email을 입력해주세요.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password">비밀번호</label>
+          <input type="text" class="form-control" id="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요." required minlength="8" maxlength="16">
+          <div class="invalid-feedback">
+            비밀번호를 입력해주세요.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="passwordCheck">비밀번호 확인</label>
+          <input type="text" class="form-control" id="passwordCheck" th:field="*{passwordCheck}" placeholder="비밀번호를 확인해주세요." required>
+          <div class="invalid-feedback">
+            비밀번호를 다시 확인해주세요.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="name">이름(실명)</label>
+          <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="이름(실명)을 입력해주세요." required>
+          <div class="invalid-feedback">
+            이름을 입력해주세요.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="name">전화번호</label>
+          <input type="text" class="form-control" id="phone_Number" th:field="*{phone_Number}" placeholder="전화번호를 입력해주세요." required>
+          <div class="invalid-feedback">
+            전화번호를 입력해주세요.
+          </div>
+        </div>
+
+        <div class="mb-4"></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">다음</button>
+        <div class="mb-4"></div>
+        <button class="btn btn-outline-secondary btn-lg btn-block" onClick="location.href='../login/login.html'" th:onClick="|location.href='@{../login/login.html}'|">이전</button>
+      </form>
     </div>
-    <footer class="my-3 text-center text-small">
-      <p class="mb-1">&copy; 열심히는하자</p>
-    </footer>
   </div>
+  <footer class="my-3 text-center text-small">
+    <p class="mb-1">&copy; 열심히는하자</p>
+  </footer>
+</div>
 
-  <script th:inline="javascript">
+<script th:inline="javascript">
 
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
+  window.addEventListener('load', () => {
+    const forms = document.getElementsByClassName('validation-form');
 
-      Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
+    Array.prototype.filter.call(forms, (form) => {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
 
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
 
-  </script>
+</script>
 
 </body>
 </html>
