@@ -2,99 +2,122 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
 
-  <link href="/static/css/signup/signup.css" th:href="@{/static/css/signup/signup.css}" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/css/signup/signup.css" th:href="@{/css/signup/signup.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
 <div class="container">
-  <div class="input-form-background row">
-    <div class="input-form col-md-6 mx-auto">
-      <h4 class="text-center">회원가입</h4>
-      <div class="text-center">
-        <input type="radio" name="type" id="type1" value="student" th:field="*{type}">
-        <label for="role1">학생</label>
-        <input type="radio" name="type" id="type2" value="teacher" th:field="*{type}">
-        <label for="role2">선생님</label>
-      </div>
-      <form class="validation-form" novalidate>
-        <div class="mb-3">
-          <label for="userEmail">Email</label>
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email을 입력해주세요." required>
-            <button class="btn btn-outline-secondary" type="button">중복확인</button>
-          </div>
-          <div class="invalid-feedback">
-            Email을 입력해주세요.
-          </div>
-        </div>
+    <div class="input-form-background row">
+        <div class="input-form col-md-6 mx-auto">
+            <h4 class="text-center">회원가입</h4>
+            <form th:action="@{auth/signup}" method="post" th:object="${accountFormDto}" class="validation-form"
+                  novalidate>
+                <div class="text-center">
+                    <input type="radio" name="type" id="type1" value="student" th:field="*{type}">
+                    <label for="type1">학생</label>
+                    <input type="radio" name="type" id="type2" value="teacher" th:field="*{type}">
+                    <label for="type2">선생님</label>
+                </div>
+                <div class="mb-3">
+                    <label for="email">Email</label>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" id="email" th:field="*{email}"
+                               placeholder="Email을 입력해주세요." required>
+                        <button class="btn btn-outline-secondary" type="button">중복확인</button>
+                    </div>
+                    <div class="invalid-feedback">
+                        Email을 입력해주세요.
+                    </div>
+                </div>
 
-        <div class="mb-3">
-          <label for="password">비밀번호</label>
-          <input type="text" class="form-control" id="password" th:field="*{password}" placeholder="비밀번호를 입력해주세요." required minlength="8" maxlength="16">
-          <div class="invalid-feedback">
-            비밀번호를 입력해주세요.
-          </div>
-        </div>
+                <div class="mb-3">
+                    <label for="password">비밀번호</label>
+                    <input type="text" class="form-control" id="password" th:field="*{password}"
+                           placeholder="비밀번호를 입력해주세요." required minlength="8" maxlength="16">
+                    <div class="invalid-feedback">
+                        비밀번호를 입력해주세요.
+                    </div>
+                </div>
 
-        <div class="mb-3">
-          <label for="password_check">비밀번호 확인</label>
-          <input type="text" class="form-control" id="password_check" th:field="*{password_check}" placeholder="비밀번호를 확인해주세요." required>
-          <div class="invalid-feedback">
-            비밀번호를 다시 확인해주세요.
-          </div>
-        </div>
+                <div class="mb-3">
+                    <label for="password_check">비밀번호 확인</label>
+                    <input type="text" class="form-control" id="password_check"
+                           placeholder="비밀번호를 확인해주세요." onchange="check_pw()" required>
+                    <div class="invalid-feedback">
+                        비밀번호를 확인해주세요.
+                    </div>
+                    <span id="check"></span>
+                </div>
 
-        <div class="mb-3">
-          <label for="name">이름(실명)</label>
-          <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="이름(실명)을 입력해주세요." required>
-          <div class="invalid-feedback">
-            이름을 입력해주세요.
-          </div>
-        </div>
+                <div class="mb-3">
+                    <label for="name">이름(실명)</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="이름(실명)을 입력해주세요."
+                           required>
+                    <div class="invalid-feedback">
+                        이름을 입력해주세요.
+                    </div>
+                </div>
 
-        <div class="mb-3">
-          <label for="name">전화번호</label>
-          <input type="text" class="form-control" id="phone_number" th:field="*{phone_number}" placeholder="전화번호를 입력해주세요." required>
-          <div class="invalid-feedback">
-            전화번호를 입력해주세요.
-          </div>
-        </div>
+                <div class="mb-3">
+                    <label for="phone_number">전화번호</label>
+                    <input type="text" class="form-control" id="phone_number" th:field="*{phone_number}"
+                           placeholder="전화번호를 입력해주세요." required>
+                    <div class="invalid-feedback">
+                        전화번호를 입력해주세요.
+                    </div>
+                </div>
 
-        <div class="mb-4"></div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">다음</button>
-        <div class="mb-4"></div>
-        <button class="btn btn-outline-secondary btn-lg btn-block" onClick="location.href='../login/login.html'" th:onClick="|location.href='@{../login/login.html}'|">이전</button>
-      </form>
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">다음</button>
+                <div class="mb-4"></div>
+                <button class="btn btn-outline-secondary btn-lg btn-block" onClick="location.href='../login/login.html'"
+                        th:onClick="|location.href='@{../login/login.html}'|">이전
+                </button>
+            </form>
+        </div>
     </div>
-  </div>
-  <footer class="my-3 text-center text-small">
-    <p class="mb-1">&copy; 열심히는하자</p>
-  </footer>
+    <footer class="my-3 text-center text-small">
+        <p class="mb-1">&copy; 열심히는하자</p>
+    </footer>
 </div>
 
 <script th:inline="javascript">
 
-  window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
+    window.addEventListener('load', () => {
+        const forms = document.getElementsByClassName('validation-form');
 
-    Array.prototype.filter.call(forms, (form) => {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
+        Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+
+    function check_pw(){
+        if(document.getElementById('password').value !='' && document.getElementById('password_check').value!=''){
+            if(document.getElementById('password').value==document.getElementById('password_check').value){
+                document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
+                document.getElementById('check').style.color='blue';
+            }
+            else{
+                document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
+                document.getElementById('check').style.color='red';
+            }
         }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
+    }
 
 </script>
 
