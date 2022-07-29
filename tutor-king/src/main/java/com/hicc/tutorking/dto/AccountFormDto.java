@@ -16,7 +16,7 @@ public class AccountFormDto {
     private String email;
 
     @NotBlank(message="비밀번호는 필수 입력 값입니다.")
-    @Pattern(regexp="[a-zA-Z1-9]{8,12}", message = "비밀번호는 영어와 숫자로 포함해서 8~12자리 이내로 입력해주세요.")
+    @Length(min=8, max=16, message = "비밀번호는 8자 이상, 16자 이하로 입력해주세요")
     private String password;
 
     @NotBlank(message="이름은 필수 입력 값입니다.")
@@ -25,7 +25,7 @@ public class AccountFormDto {
     @NotBlank(message="가입하려는 유형을 선택해주세요.")
     private String type;
 
-    @PositiveOrZero
+    @PositiveOrZero(message="숫자를 입력해주세요.")
     @NotBlank(message="전화번호는 필수 입력 값입니다.")
     private String phone_number;
 }
