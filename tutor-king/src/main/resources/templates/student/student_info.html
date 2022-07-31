@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Info</title>
 
-  <link href="/static/css/info/info_student.css" th:href="@{/static/css/info/info_student.css}" rel="stylesheet">
+  <link href="/css/info/info_student.css" th:href="@{/css/info/info_student.css}" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,7 +20,7 @@
       <div class="input-form col-md-6 mx-auto">
         <h3 class="mb-3">나의 정보를 선택해주세요!</h3>
         <h4><span class="badge bg-primary text-white">학생</span></h4>
-        <form th:action="@{}" method="post" th:object="${}" class="validation-form" novalidate>
+        <form th:action="@{}" method="post" th:object="${studentInfoDto}" class="validation-form" novalidate>
 
           <div class="row">
             <div class="col-md-12 mb-3">

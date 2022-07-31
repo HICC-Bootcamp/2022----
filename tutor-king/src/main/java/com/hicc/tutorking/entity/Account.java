@@ -42,15 +42,14 @@ public class Account {
         account.setType(accountFormDto.getType());
         String password=passwordEncoder.encode(accountFormDto.getPassword());
         account.setPassword(password);
-        account.setRole(Role.STUDENT);
-        /*
+
         if((accountFormDto.getType()).equals("student")){
             account.setRole(Role.STUDENT);
         }
         else if((accountFormDto.getType()).equals("teacher")){
             account.setRole(Role.TEACHER);
         }
-        */
+
         return account;
 
     }
