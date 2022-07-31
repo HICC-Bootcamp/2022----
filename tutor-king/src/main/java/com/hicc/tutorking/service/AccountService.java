@@ -3,6 +3,10 @@ package com.hicc.tutorking.service;
 import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class AccountService
-        //implements  UserDetailsService
+        implements UserDetailsService
 {
     private final AccountRepository accountRepository;
 
@@ -28,7 +32,7 @@ public class AccountService
         }
     }
 
-    /*
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -38,14 +42,10 @@ public class AccountService
             throw new UsernameNotFoundException(email);
         }
 
-        return User.builder()//User객체를 반환할 때, 이메일 비밀번호 타입을 파라미터로 넘겨줌
+        return User.builder()
                 .username(account.getEmail())
                 .password(account.getPassword())
                 .roles(account.getRole().toString())
                 .build();
     }
-    */
-
-
-
 }
