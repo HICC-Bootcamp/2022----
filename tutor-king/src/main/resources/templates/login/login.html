@@ -34,8 +34,8 @@
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 
         <div class="join">
-            <button type="button" class="btn btn-outline-secondary" onClick="location.href='../signup/signup.html'"
-                    th:onClick="|location.href='@{../auth/signup}'|">Join
+            <button type="button" class="btn btn-outline-secondary"
+                    th:onClick="|location.href='@{/auth/signup}'|">Join
             </button>
         </div>
 

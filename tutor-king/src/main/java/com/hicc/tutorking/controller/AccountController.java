@@ -26,11 +26,12 @@ public class AccountController {
     @GetMapping(value="/signup")
     public String accountForm(Model model){
         model.addAttribute("accountFormDto",new AccountFormDto());
-        return "signup/signup";//이부분 수정해야 함 경로 수정 필요함
+        return "signup/signup";
     }
 
+
     @PostMapping(value="/signup")
-    public String newAccount(@Valid AccountFormDto accountFormDto, BindingResult bindingResult, Model model) {
+    public String getCreateNewAccountView(@Valid AccountFormDto accountFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "signup/signup";
         }

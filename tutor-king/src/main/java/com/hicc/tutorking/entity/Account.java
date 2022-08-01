@@ -27,9 +27,7 @@ public class Account {
 
     private String name;
 
-    private String type; //선생님 학생 type
-
-    private String phone_number;
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -38,15 +36,14 @@ public class Account {
         Account account = new Account();
         account.setEmail(accountFormDto.getEmail());
         account.setName(accountFormDto.getName());
-        account.setPhone_number(accountFormDto.getPhone_number());
-        account.setType(accountFormDto.getType());
+        account.setPhoneNumber(accountFormDto.getPhoneNumber());
         String password=passwordEncoder.encode(accountFormDto.getPassword());
         account.setPassword(password);
 
-        if((accountFormDto.getType()).equals("student")){
+        if((accountFormDto.getRole()).equals("student")){
             account.setRole(Role.STUDENT);
         }
-        else if((accountFormDto.getType()).equals("teacher")){
+        else if((accountFormDto.getRole()).equals("teacher")){
             account.setRole(Role.TEACHER);
         }
 
