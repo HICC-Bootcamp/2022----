@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,37 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Info</title>
 
-    <link href="/static/css/info/info.css" th:href="@{/static/css/info/info.css}" rel="stylesheet">
+    <link href="/css/info/info.css" th:href="@{/css/info/info.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 <div class="container">
-    <div class="input-form-backgroud row">
+    <div class="input-form-background row">
         <div class="input-form col-md-6 mx-auto">
             <h3 class="mb-3">나의 정보를 선택해주세요!</h3>
             <h4><span class="badge bg-primary text-white">학생</span></h4>
-            <form th:action="@{students/info}"method="post" th:object="${studentInfoDto}" enctype="multipart/form-data" class="validation-form"
+            <form th:action="@{info}" method="post" th:object="${studentInfoDto}" enctype="multipart/form-data"
+                  class="validation-form"
                   novalidate>
 
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="area">지역</label>
-                        <select class="custom-select d-block w-100" id="area" th:field="*{area}" required>
-                            <option value="">지역을 선택해주세요.</option>
-                            <option>서울</option>
-                            <option>경기</option>
-                            <option>강원</option>
-                            <option>충남</option>
-                            <option>충북</option>
-                            <option>전북</option>
-                            <option>전남</option>
-                            <option>경북</option>
-                            <option>경남</option>
-                            <option>제주</option>
+                        <select class="custom-select d-block w-100" id="area" th:field="*{area}" name="area">
+                            <option th:value="''" selected disabled>지역을 선택해주세요.</option>
+                            <option th:value="'서울'">서울</option>
+                            <option th:value="'경기'">경기</option>
+                            <option th:value="'강원'">강원</option>
+                            <option th:value="'충남'">충남</option>
+                            <option th:value="'충북'">충북</option>
+                            <option th:value="'전북'">전북</option>
+                            <option th:value="'전남'">전남</option>
+                            <option th:value="'경북'">경북</option>
+                            <option th:value="'경남'">경남</option>
+                            <option th:value="'제주'">제주</option>
                         </select>
                         <div class="invalid-feedback">
                             지역을 선택해주세요.
@@ -50,19 +56,19 @@
                         <label for="grade">해당 학년</label>
                         <select class="custom-select d-block w-100" id="grade" th:field="*{admission}" required>
                             <!--admission-->
-                            <option value="">해당 학년을 선택해주세요.</option>
-                            <option>초등학교 1학년</option>
-                            <option>초등학교 2학년</option>
-                            <option>초등학교 3학년</option>
-                            <option>초등학교 4학년</option>
-                            <option>초등학교 5학년</option>
-                            <option>초등학교 6학년</option>
-                            <option>중학교 1학년</option>
-                            <option>중학교 2학년</option>
-                            <option>중학교 3학년</option>
-                            <option>고등학교 1학년</option>
-                            <option>고등학교 2학년</option>
-                            <option>고등학교 3학년</option>
+                            <option th:value="''" selected disabled>>해당 학년을 선택해주세요.</option>
+                            <option th:value="'8'">초등학교 1학년</option>
+                            <option th:value="'9'">초등학교 2학년</option>
+                            <option th:value="'10'">초등학교 3학년</option>
+                            <option th:value="'11'">초등학교 4학년</option>
+                            <option th:value="'12'">초등학교 5학년</option>
+                            <option th:value="'13'">초등학교 6학년</option>
+                            <option th:value="'14'">중학교 1학년</option>
+                            <option th:value="'15'">중학교 2학년</option>
+                            <option th:value="'16'">중학교 3학년</option>
+                            <option th:value="'17'">고등학교 1학년</option>
+                            <option th:value="'18'">고등학교 2학년</option>
+                            <option th:value="'19'">고등학교 3학년</option>
                         </select>
                         <div class="invalid-feedback">
                             해당 학년을 선택해주세요.
@@ -73,14 +79,14 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="style">원하는 선생님의 성향</label>
-                        <select class="custom-select d-block w-100" id="style" th:field="*{style}" required>
-                            <option value="">원하는 선생님의 성향을 선택해주세요.</option>
-                            <option>열정적인</option>
-                            <option>다정한</option>
-                            <option>재미있는</option>
-                            <option>카리스마 있는</option>
-                            <option>꼼꼼한</option>
-                            <option>차분한</option>
+                        <select class="custom-select d-block w-100" id="style" th:field="*{teacherStyle}" required>
+                            <option th:value="''" selected disabled>>원하는 선생님의 성향을 선택해주세요.</option>
+                            <option th:value="'열정적인'">열정적인</option>
+                            <option th:value="'다정한'">다정한</option>
+                            <option th:value="'재미있는'">재미있는</option>
+                            <option th:value="'카리스마 있는'">카리스마 있는</option>
+                            <option th:value="'꼼꼼한'">꼼꼼한</option>
+                            <option th:value="'차분한'">차분한</option>
                         </select>
                         <div class="invalid-feedback">
                             원하는 선생님의 성향을 선택해주세요.
@@ -92,12 +98,12 @@
                     <div class="col-md-12 mb-3">
                         <label for="subject">관심과목</label>
                         <select class="custom-select d-block w-100" id="subject" th:field="*{subject}" required>
-                            <option value="">관심과목을 선택해주세요.</option>
-                            <option>국어</option>
-                            <option>수학</option>
-                            <option>영어</option>
-                            <option>과학</option>
-                            <option>사회</option>
+                            <option th:value="''" selected disabled>>관심과목을 선택해주세요.</option>
+                            <option th:value="'국어'">국어</option>
+                            <option th:value="'수학'">수학</option>
+                            <option th:value="'영어'">영어</option>
+                            <option th:value="'과학'">과학</option>
+                            <option th:value="'사회'">사회</option>
                         </select>
                         <div class="invalid-feedback">
                             관심과목을 선택해주세요.
@@ -105,22 +111,23 @@
                     </div>
                 </div>
 
+
+
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="money">과외비용(시급)</label>
                         <select class="custom-select d-block w-100" id="money" th:field="*{money}" required>
-                            <option value="">과외비용(시급)을 선택해주세요.</option>
-                            <option>1만원 대</option>
-                            <option>2만원 대</option>
-                            <option>3만원 대</option>
-                            <option>4만원 대 이상</option>
+                            <option th:value="''" selected disabled>>과외비용(시급)을 선택해주세요.</option>
+                            <option th:value="'1'">1만원 대</option>
+                            <option th:value="'2'">2만원 대</option>
+                            <option th:value="'3'">3만원 대</option>
+                            <option th:value="'4'">4만원 대 이상</option>
                         </select>
                         <div class="invalid-feedback">
                             과외비용(시급)을 선택해주세요.
                         </div>
                     </div>
                 </div>
-
 
                 <div class="mb-4"></div>
                 <button class="btn btn-primary btn-lg btn-block" type="submit"

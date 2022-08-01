@@ -44,7 +44,7 @@ public class AccountController {
             return "signup/signup";
         }
 
-        return "redirect:/";
+        return "redirect:/auth/login";
     }
 
     @GetMapping(value = "/login")
@@ -61,3 +61,4 @@ public class AccountController {
 
 
 }
+

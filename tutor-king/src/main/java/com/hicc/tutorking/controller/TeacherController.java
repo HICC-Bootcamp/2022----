@@ -1,6 +1,8 @@
 package com.hicc.tutorking.controller;
 
 import com.hicc.tutorking.dto.TeacherInfoDto;
+import com.hicc.tutorking.entity.Student;
+import com.hicc.tutorking.entity.Teacher;
 import com.hicc.tutorking.service.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -31,10 +33,17 @@ public class TeacherController {
             return  "teacher/teacher_info";
         }
 
+        try {
+            Teacher teacher = Teacher.createTeacher(teacherInfoDto);
+            teacherService.saveTeacher(teacher);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "teacher/teacher_info";
+        }
+
         return "redirect:/";
     }
 
     // @GetMapping(value="/connections")
 
 }
-

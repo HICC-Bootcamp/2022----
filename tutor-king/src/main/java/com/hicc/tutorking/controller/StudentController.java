@@ -1,6 +1,7 @@
 package com.hicc.tutorking.controller;
 
 import com.hicc.tutorking.dto.StudentInfoDto;
+import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,13 @@ public class StudentController {
         }
 
         try {
-            studentService.saveStudent(studentInfoDto);
-        } catch (Exception e){
-            model.addAttribute("errorMessage","에러 발생했습니다.");
+            Student student = Student.createStudent(studentInfoDto);
+            studentService.saveStudent(student);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
             return "student/student_info";
         }
+
 
         return "redirect:/";
     }
