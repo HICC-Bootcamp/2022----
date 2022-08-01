@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Info</title>
 
-    <link href="/css/info/info_teacher.css" th:href="@{/css/info/info_teacher.css}" rel="stylesheet">
+    <link href="/static/css/info/info.css" th:href="@{/static/css/info/info.css}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -140,11 +140,11 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="experience">경력</label>
+                    <label for="experience">경력 및 소개</label>
                     <input type="text" class="form-control" id="experience" th:field="*{experience}"
                            placeholder="경력을 100자 아내로 작성해주세요." maxlength="100" required>
                     <div class="invalid-feedback">
-                        경력을 작성해주세요.
+                        경력 및 소개 작성해주세요.
                     </div>
                 </div>
 
