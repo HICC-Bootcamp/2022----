@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+
+    <link href="/css/info/info_teacher.css" th:href="@{/css/info/info_teacher.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-6 mx-auto">
+            <h3 class="mb-3">나의 정보를 선택해주세요!</h3>
+            <h4><span class="badge bg-primary text-white">선생님</span></h4>
+            <form th:action="@{teachers/signup}" method="post" th:object="${teacherInfoDto}" enctype="multipart/form-data"  class="validation-form"
+                  novalidate>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="area">지역</label>
+                        <select class="custom-select d-block w-100" id="area" th:field="*{area}" required>
+                            <option value="">지역을 선택해주세요.</option>
+                            <option>서울</option>
+                            <option>경기</option>
+                            <option>강원</option>
+                            <option>충남</option>
+                            <option>충북</option>
+                            <option>전북</option>
+                            <option>전남</option>
+                            <option>경북</option>
+                            <option>경남</option>
+                            <option>제주</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            지역을 선택해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="age">나이</label>
+                    <input type="text" class="form-control" id="age" th:field="*{age}" placeholder="나이를 입력해주세요."
+                           required>
+                    <div class="invalid-feedback">
+                        나이를 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="style">성향</label>
+                        <select class="custom-select d-block w-100" id="style" th:field="*{style}" required>
+                            <option value="">자신의 성향을 선택해주세요.</option>
+                            <option>열정적인</option>
+                            <option>다정한</option>
+                            <option>재미있는</option>
+                            <option>카리스마 있는</option>
+                            <option>꼼꼼한</option>
+                            <option>차분한</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            자신의 성향을 선택해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="target">가르칠 대상</label>
+                        <select class="custom-select d-block w-100" id="target" th:field="*{target}" required>
+                            <option value="">가르칠 대상을 선택해주세요.</option>
+                            <option>초등학교 1학년</option>
+                            <option>초등학교 2학년</option>
+                            <option>초등학교 3학년</option>
+                            <option>초등학교 4학년</option>
+                            <option>초등학교 5학년</option>
+                            <option>초등학교 6학년</option>
+                            <option>중학교 1학년</option>
+                            <option>중학교 2학년</option>
+                            <option>중학교 3학년</option>
+                            <option>고등학교 1학년</option>
+                            <option>고등학교 2학년</option>
+                            <option>고등학교 3학년</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            가르칠 대상을 선택해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="subject">가르칠 과목</label>
+                        <select class="custom-select d-block w-100" id="subject" th:field="*{subject}" required>
+                            <option value="">가르칠 과목을 선택해주세요.</option>
+                            <option>국어</option>
+                            <option>수학</option>
+                            <option>영어</option>
+                            <option>과학</option>
+                            <option>사회</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            가르칠 과목을 선택해주세요.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="university">대학</label>
+                    <input type="text" class="form-control" id="university" th:field="*{university}"
+                           placeholder="대학을 입력해주세요." required>
+                    <div class="invalid-feedback">
+                        대학을 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="major">전공</label>
+                    <input type="text" class="form-control" id="major" th:field="*{major}" placeholder="전공을 입력해주세요."
+                           required>
+                    <div class="invalid-feedback">
+                        전공을 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="wage">과외비용(시급)</label>
+                    <input type="text" class="form-control" id="wage" th:field="*{wage}" placeholder="과외비용(시급)을 입력해주세요."
+                           required>
+                    <div class="invalid-feedback">
+                        과외비용(시급)을 입력해주세요.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="experience">경력</label>
+                    <input type="text" class="form-control" id="experience" th:field="*{experience}"
+                           placeholder="경력을 100자 아내로 작성해주세요." maxlength="100" required>
+                    <div class="invalid-feedback">
+                        경력을 작성해주세요.
+                    </div>
+                </div>
+
+
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit"
+                        onClick="location.href='../login/login.html'"
+                        th:onClick="|location.href='@{../login/login.html}'|">다음
+                </button>
+
+            </form>
+        </div>
+    </div>
+    <footer class="my-3 text-center text-small">
+        <p class="mb-1">&copy; 열심히는하자</p>
+    </footer>
+</div>
+<script th:inline="javascript">
+
+    $(document).ready(function () {
+        let errorMessage = [[${errorMessage}]];
+        if (errorMessage != null) {
+            alert(errorMessage);
+        }
+    });
+
+    window.addEventListener('load', () => {
+        const forms = document.getElementsByClassName('validation-form');
+
+        Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+</script>
+</body>
+
+</html>
