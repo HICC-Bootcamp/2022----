@@ -1,4 +1,4 @@
-package com.hicc.tutorking.service;
+/*package com.hicc.tutorking.service;
 
 import com.hicc.tutorking.dto.AccountFormDto;
 import com.hicc.tutorking.entity.Account;
@@ -59,4 +59,4 @@ class AccountServiceTest {
         });
         assertEquals("이미 가입된 회원입니다.", e.getMessage());
     }
-}
+}*/
