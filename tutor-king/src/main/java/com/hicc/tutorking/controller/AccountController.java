@@ -1,6 +1,7 @@
 package com.hicc.tutorking.controller;
 
 
+import com.hicc.tutorking.constant.Role;
 import com.hicc.tutorking.dto.AccountFormDto;
 import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.service.AccountService;
@@ -23,14 +24,14 @@ public class AccountController {
     private final AccountService accountService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value="/signup")
-    public String accountForm(Model model){
-        model.addAttribute("accountFormDto",new AccountFormDto());
+    @GetMapping(value = "/signup")
+    public String accountForm(Model model) {
+        model.addAttribute("accountFormDto", new AccountFormDto());
         return "signup/signup";
     }
 
 
-    @PostMapping(value="/signup")
+    @PostMapping(value = "/signup")
     public String getCreateNewAccountView(@Valid AccountFormDto accountFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "signup/signup";
@@ -39,26 +40,34 @@ public class AccountController {
         try {
             Account account = Account.createAccount(accountFormDto, passwordEncoder);
             accountService.saveAccount(account);
+
+            if (((accountService.CheckIdentity(account)).equals("student"))) {
+                return "redirect:/students/info";
+            } else if (((accountService.CheckIdentity(account)).equals("teacher"))){
+                return "redirect:/teachers/info";
+            }else return "redirect:/";
+
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "signup/signup";
         }
 
-        return "redirect:/auth/login";
+
+
     }
 
     @GetMapping(value = "/login")
-    public String loginAccount(){
+    public String loginAccount() {
         return "/login/login";
     }
 
     @GetMapping(value = "/login/error")
-    public String loginError(Model model){
+    public String loginError(Model model) {
         model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요");
         return "/login/login";
     }
 
 
-
 }
+
 
