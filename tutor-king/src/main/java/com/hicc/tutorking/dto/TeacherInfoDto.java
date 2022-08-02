@@ -21,7 +21,7 @@ public class TeacherInfoDto {
 
     @PositiveOrZero(message = "숫자를 입력해주세요. ")
     @NotBlank(message = "생년월일은 필수 입력 값입니다.")
-    private int age;
+    private String age;
 
     @NotBlank(message = "수업 성향은 필수 입력 값입니다.")
     private String style;
@@ -45,6 +45,7 @@ public class TeacherInfoDto {
     @Lob
     @Length(min = 0, max = 100, message = "100자 이내로 입력해주세요.")
     private String experience;
+    /*
 
     private static ModelMapper modelMapper = new ModelMapper();
 
@@ -55,4 +56,6 @@ public class TeacherInfoDto {
     public static TeacherInfoDto of(Teacher teacher){
         return modelMapper.map(teacher,TeacherInfoDto.class);
     }
+    */
+
 }

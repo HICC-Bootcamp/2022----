@@ -1,5 +1,6 @@
 package com.hicc.tutorking.service;
 
+import com.hicc.tutorking.constant.Role;
 import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class AccountService implements UserDetailsService
-{
+public class AccountService implements UserDetailsService {
     private final AccountRepository accountRepository;
 
     public Account saveAccount(Account account) {
@@ -31,13 +31,22 @@ public class AccountService implements UserDetailsService
         }
     }
 
+    public String CheckIdentity(Account account) {
+        boolean studentRole= accountRepository.existsByEmailAndRole(account.getEmail(),Role.STUDENT);
+        boolean teacherRole= accountRepository.existsByEmailAndRole(account.getEmail(),Role.TEACHER);
+        if(studentRole==true){
+            return "student";
+        }else if (teacherRole==true) return "teacher";
+        else return "not exist";
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Account account = accountRepository.findByEmail(email);
 
-        if(account == null){
+        if (account == null) {
             throw new UsernameNotFoundException(email);
         }
 
@@ -48,3 +57,4 @@ public class AccountService implements UserDetailsService
                 .build();
     }
 }
+

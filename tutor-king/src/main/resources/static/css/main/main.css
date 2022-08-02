@@ -1,0 +1,36 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.choose-role {
+    padding: 10px;
+}
+
+.form-matching {
+    width: 100%;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+}
+
+.w-100 {
+  max-width: 187px;
+}
+
+.form-matching .form-floating:focus-within {
+  z-index: 2;
+}
+
+.logout {
+  padding-top: 30px;
+  margin: 10px;
+}
