@@ -76,8 +76,8 @@ public class StudentService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Teacher> getTeacherPage(Pageable pageable) {
-        return teacherRepository.findOrderByHashtagDesc(pageable);
+    public List<Teacher> getTeacherPage() {
+        return teacherRepository.findOrderByHashtagDesc();
     }
 
 

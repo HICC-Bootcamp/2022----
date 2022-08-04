@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/students")
@@ -68,9 +69,7 @@ public class StudentController {
         String studentEmail = principal.getName();
         studentService.suggest(studentEmail);
 
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
-
-        List<Teacher> teachers = studentService.getTeacherPage(pageable);
+        List<Teacher> teachers = studentService.getTeacherPage();
         model.addAttribute("teachers", teachers);//TODO:프론트엔드
 
         model.addAttribute("connectionDto", new ConnectionDto());//TODO:프론트엔드 여기에 학생이 고른 선생님의 이메일
