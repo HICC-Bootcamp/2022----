@@ -12,5 +12,7 @@ public class TeacherReplyDto {
     private Long id;
 
     @NotBlank(message="수락/거절을 선택해주세요.")
-    private boolean teacherReply;
+    private Boolean teacherReply;
+
+    private String studentEmail; //학생 메일
 }

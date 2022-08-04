@@ -7,8 +7,6 @@ import com.hicc.tutorking.repository.ConnectionRepository;
 import com.hicc.tutorking.repository.StudentRepository;
 import com.hicc.tutorking.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,11 +25,11 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
-    public Connection saveConnection(Connection connection){
+    public Connection saveConnection(Connection connection) {
         return connectionRepository.save(connection);
     }
 
-    public void resetHashtag(){
+    public void resetHashtag() {
 
         List<Teacher> teachers = teacherRepository.findAll();
 

@@ -1,6 +1,5 @@
 package com.hicc.tutorking.controller;
 
-import com.hicc.tutorking.dto.ConnectionDto;
 import com.hicc.tutorking.dto.TeacherInfoDto;
 import com.hicc.tutorking.dto.TeacherReplyDto;
 import com.hicc.tutorking.entity.Connection;
@@ -8,7 +7,6 @@ import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
 import com.hicc.tutorking.service.TeacherService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,32 +49,52 @@ public class TeacherController {
     }
 
     @GetMapping(value = "/connections")
-    public String teacherMain() {  //TODO:teachers/connections/로 가는 건 프론트엔드에서 구현
+    public String teacherMain() {  //TODO:버튼 누르면 teachers/connections/requests로 가는 건 프론트엔드에서 구현
         return "teacher/teacher_main";
     }
 
-    @GetMapping(value = "/connections/requests") // 여기로 가게 해주세용
+    @GetMapping(value = "/connections/checks") // 여기로 가게 해주세용
     public String teacherConnection(Principal principal, Model model) {
         String teacherEmail = principal.getName();
 
         List<Student> InfoStudentWhoAsked = teacherService.InfoStudentWhoAsked(teacherEmail);
-        List<Connection> EmailStudentWhoAskedEmail = teacherService.EmailStudentWhoAsked(teacherEmail);
+        List<Connection> EmailStudentWhoAsked = teacherService.EmailStudentWhoAsked(teacherEmail);
 
         model.addAttribute("StudentWhoAskedInfo", InfoStudentWhoAsked); //우리가 넘겨주는 거 선생님한테 매칭을 요청한 학생들의 정보들
-        model.addAttribute("connections", EmailStudentWhoAskedEmail); //우리가 넘겨주는 거 선생님한테 매칭을 요청한 학생들의 이메일주소
-        model.addAttribute("teacherReplyDto", new TeacherReplyDto());
-        // TODO: 선생님한테 매칭을 요청한 학생들의 리스트를 프론트에게 준다. 프론트엔드에서 teacherReplyDto에 수락버튼을 눌렀을때
-        // 그 수락한 학생의 이메일을 보내줘야 함
-        // 리스트에서 각각 학생들 정보를 꺼내서 프론트에 보이게 하는 것
-        // * List로 학생의 info 에 맞는 선생님들의 리스트를 보내줌
-        // 프론트엔드에서 사용자가 선생님을 선택한다. 그 선생님의 이메일을 백엔드에게 전달해줘야함 *
+        model.addAttribute("EmailStudentWhoAsked", EmailStudentWhoAsked); //우리가 넘겨주는 거 선생님한테 매칭을 요청한 학생들의 이메일주소
+        model.addAttribute("teacherReplyDto", new TeacherReplyDto());//우리가 프론트엔드에 학생이메일이랑 수락 정보를 받음
+
         return "teacher/teacher_matching";
 
     }
 
-    @PostMapping(value = "/connections/requests")
-    public String teacherConnection(Principal principal, ConnectionDto connectionDto,
+    //TODO: !!!프론트엔드!!!
+    // 선생님 버전; 선생님한테 매칭을 요청한 학생들의 정보와 이메일을 백엔드가 프론트에게 줌.("StudentWhoAskedInfo","EmailStudentWhoAsked")
+    // 프론트엔드에서 그 리스트에서 각 학생들 정보 꺼내서 프론트엔드에 보이게 하는 것,
+    // 선생님이 수락/거절한 학생의 이메일과 수락했는지 거절했는지의 여부를
+    // teacherReplyDto를 통해 백엔드에 보내줘야 함
+
+    //TODO: !!!프론트엔드!!!
+    // 학생 버전;  학생의 info 에 맞는 선생님들의 리스트를 백엔드가 보내줌("teachers"로 보내줌)
+    // 리스트에서 각각 선생님들 정보를 꺼내서 프론트에 보이게 하는 것
+    //  프론트엔드에서 사용자가 선생님을 선택한다. 그 선택한 선생님의 이메일을 ConnectionDto를 통해서 백엔드에게 전달해줘야함 *
+
+
+
+    //TODO:프론트엔드에서 선생님은 학생 수락이나 거절이나 버튼 누르면 그 버튼들을 다신 못 누르게 했으면 좋겠습니당
+    @PostMapping(value = "/connections/checks")
+    public String teacherConnection(Principal principal, TeacherReplyDto teacherReplyDto,
                                     BindingResult bindingResult, Model model) {
+
+        String teacherEmail = principal.getName();
+        teacherService.AddTeacherReply(teacherEmail, teacherReplyDto);
+
+        if (bindingResult.hasErrors()) {
+            return "teacher/teacher_matching";
+        }
+
+        return "redirect:/teachers/connections/checks";
+
 
     }
 }

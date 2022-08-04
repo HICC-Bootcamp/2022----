@@ -32,11 +32,11 @@ public class AccountService implements UserDetailsService {
     }
 
     public String CheckIdentity(Account account) {
-        boolean studentRole= accountRepository.existsByEmailAndRole(account.getEmail(),Role.STUDENT);
-        boolean teacherRole= accountRepository.existsByEmailAndRole(account.getEmail(),Role.TEACHER);
-        if(studentRole==true){
+        boolean studentRole = accountRepository.existsByEmailAndRole(account.getEmail(), Role.STUDENT);
+        boolean teacherRole = accountRepository.existsByEmailAndRole(account.getEmail(), Role.TEACHER);
+        if (studentRole == true) {
             return "student";
-        }else if (teacherRole==true) return "teacher";
+        } else if (teacherRole == true) return "teacher";
         else return "not exist";
     }
 

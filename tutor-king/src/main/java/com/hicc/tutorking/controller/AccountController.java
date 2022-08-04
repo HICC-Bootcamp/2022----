@@ -1,7 +1,6 @@
 package com.hicc.tutorking.controller;
 
 
-import com.hicc.tutorking.constant.Role;
 import com.hicc.tutorking.dto.AccountFormDto;
 import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.service.AccountService;
@@ -30,7 +29,6 @@ public class AccountController {
         return "signup/signup";
     }
 
-
     @PostMapping(value = "/signup")
     public String getCreateNewAccountView(@Valid AccountFormDto accountFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -43,9 +41,9 @@ public class AccountController {
 
             if (((accountService.CheckIdentity(account)).equals("student"))) {
                 return "redirect:/students/info";
-            } else if (((accountService.CheckIdentity(account)).equals("teacher"))){
+            } else if (((accountService.CheckIdentity(account)).equals("teacher"))) {
                 return "redirect:/teachers/info";
-            }else return "redirect:/";
+            } else return "redirect:/";
 
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());

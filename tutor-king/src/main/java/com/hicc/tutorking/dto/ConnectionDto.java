@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class ConnectionDto {
 
+
     private String teacherEmail;
 }

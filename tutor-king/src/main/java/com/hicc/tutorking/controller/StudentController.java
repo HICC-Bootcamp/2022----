@@ -8,9 +8,6 @@ import com.hicc.tutorking.entity.Teacher;
 import com.hicc.tutorking.repository.TeacherRepository;
 import com.hicc.tutorking.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,11 +54,13 @@ public class StudentController {
     }
 
     @GetMapping(value = "/connections") //TODO:학생의 메인페이지, 버튼을 눌러서 매칭으로 들어갈건지 요청한 매칭 확인 부분으로
-    // TODO: 들어갈 건지는 프론트엔드에서 구현함
+                                           // 들어갈 건지는 프론트엔드에서 구현함(프론트)
     public String studentMain() {
-        studentService.resetHashtag(); //TODO:이거 좀 하.. 일단 메인 열릴때마다 해시태그 리셋되게 함.. 로그아웃되면 리셋되게 하고 싶음
+        studentService.resetHashtag(); //TODO:이거 좀 하.. 일단 메인 열릴때마다 해시태그 리셋되게 함.. 로그아웃되면 리셋되게 하고 싶음(백엔드)
         return "student/student_main";
     }
+
+
 
     @GetMapping(value = {"/connections/matching"}) // 학생의 매칭 부분으로 들어감
     public String studentMatch(Principal principal, @PathVariable("page")
@@ -70,9 +69,9 @@ public class StudentController {
         studentService.suggest(studentEmail);
 
         List<Teacher> teachers = studentService.getTeacherPage();
-        model.addAttribute("teachers", teachers);//TODO:프론트엔드
+        model.addAttribute("teachers", teachers);//TODO:프론트엔드에 학생 인포에 맞는 선생님 리스트가 넘어감
 
-        model.addAttribute("connectionDto", new ConnectionDto());//TODO:프론트엔드 여기에 학생이 고른 선생님의 이메일
+        model.addAttribute("connectionDto", new ConnectionDto());//TODO:프론트엔드가 학생이 고른 선생님의 이메일을 백엔드로 줌
         return "student/student_matching";
     }
 
@@ -94,8 +93,15 @@ public class StudentController {
         }
 
         return "redirect:/students/connections"; //student 페이지 메인으로 돌아간다
-
     }
 
-
 }
+
+//TODO:/connections/checks (학생-요청한 매칭 확인)
+// 예지 언니
+// TODO: 자신의 이메일 주소(학생)를 principal로 받아와서, 이걸 connection repository 에서 찾는다
+// TODO: 그래서 그 findByEmail 로 찾은 connection repository 에서 teacherEmail을 찾아서 그걸로
+//  teacher repository를 찾아서 그 레포안에 있는 선생님의 정보를 프론트엔드에 전달해준다
+// TODO: 그래서 그 findByEmail 로 찾은 connection repository 에서 teacherReply에 뭐가 담겨있는지를 프론트엔드에 전달해준다
+
+
