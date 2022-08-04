@@ -16,7 +16,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-
     private final AccountService accountService;
 
     @Bean
@@ -29,20 +28,16 @@ public class SecurityConfig {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
-                .logoutSuccessUrl("/")
-        ;
+                .logoutSuccessUrl("/");
 
         http.authorizeRequests()
                 .mvcMatchers("/css/**", "/js/**", "/img/**").permitAll()
                 .mvcMatchers("/", "/auth/**", "/item/**", "/images/**").permitAll()
                 .mvcMatchers("/students/**").hasRole("STUDENT")
                 .mvcMatchers("/teachers/**").hasRole("TEACHER")
-                .anyRequest().authenticated()
-        ;
+                .anyRequest().authenticated();
 
-        http.exceptionHandling()
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-        ;
+        http.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint());
 
         return http.build();
     }

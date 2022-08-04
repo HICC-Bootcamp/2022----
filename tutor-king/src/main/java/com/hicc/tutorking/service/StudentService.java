@@ -1,12 +1,18 @@
 package com.hicc.tutorking.service;
 
-import com.hicc.tutorking.dto.StudentInfoDto;
-import com.hicc.tutorking.entity.Account;
+import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
+import com.hicc.tutorking.entity.Teacher;
+import com.hicc.tutorking.repository.ConnectionRepository;
 import com.hicc.tutorking.repository.StudentRepository;
+import com.hicc.tutorking.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -14,7 +20,65 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
     private final StudentRepository studentRepository;
 
+    private final ConnectionRepository connectionRepository;
+    private final TeacherRepository teacherRepository;
+
     public Student saveStudent(Student student) {
         return studentRepository.save(student);
     }
+
+    public Connection saveConnection(Connection connection){
+        return connectionRepository.save(connection);
+    }
+
+    public void resetHashtag(){
+
+        List<Teacher> teachers = teacherRepository.findAll();
+
+        for (int i = 0; i < teachers.size(); i++) {
+            Teacher teacher = teachers.get(i);
+            teacher.setHashtag(0);
+        }
+    }
+
+    public void suggest(String email) {
+
+        Student student = studentRepository.findByEmail(email);
+        List<Teacher> teachers = teacherRepository.findAll();
+
+        for (int i = 0; i < teachers.size(); i++) {
+            Teacher teacher = teachers.get(i);
+            teacher.setHashtag(0);
+        }
+
+        for (int i = 0; i < teachers.size(); i++) {
+            Teacher teacher = teachers.get(i);
+            int same = 0; //몇 개가 맞는지
+
+            if (teacher.getArea().equals(student.getArea())) {
+                same++;
+            }
+            if (teacher.getStyle().equals(student.getTeacherStyle())) {
+                same++;
+            }
+            if ((teacher.getSubject().equals(student.getTeacherStyle()))) {
+                same++;
+            }
+            if (teacher.getTarget().equals(student.getAdmission())) {
+                same++;
+            }
+            if (teacher.getWage() <= (student.getMoney()) + 9999) {
+                same++;
+            }
+            teacher.setHashtag(same);
+        }
+
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Teacher> getTeacherPage(Pageable pageable) {
+        return teacherRepository.findOrderByHashtagDesc(pageable);
+    }
+
+
 }

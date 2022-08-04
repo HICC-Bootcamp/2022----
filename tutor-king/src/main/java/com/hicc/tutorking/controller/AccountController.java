@@ -51,9 +51,6 @@ public class AccountController {
             model.addAttribute("errorMessage", e.getMessage());
             return "signup/signup";
         }
-
-
-
     }
 
     @GetMapping(value = "/login")

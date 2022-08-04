@@ -40,7 +40,7 @@ public class TeacherInfoDto {
 
     @PositiveOrZero(message = "숫자를 입력해주세요. ")
     @NotBlank(message = "희망 과외비는 필수 입력 값입니다.")
-    private String wage;
+    private int wage;
 
     @Lob
     @Length(min = 0, max = 100, message = "100자 이내로 입력해주세요.")

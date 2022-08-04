@@ -32,8 +32,9 @@ public class Teacher {
     private String target;
     private String university;
     private String major;
-    private String wage;
+    private int wage;
     private String experience;
+    private int hashtag;
 
     public static Teacher createTeacher(TeacherInfoDto teacherInfoDto) {
         Teacher teacher = new Teacher();
@@ -46,6 +47,7 @@ public class Teacher {
         teacher.setMajor(teacherInfoDto.getMajor());
         teacher.setWage(teacherInfoDto.getWage());
         teacher.setExperience(teacherInfoDto.getExperience());
+        teacher.setHashtag(0);
         return teacher;
 
     }

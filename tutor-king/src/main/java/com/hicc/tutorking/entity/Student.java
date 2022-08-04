@@ -22,11 +22,13 @@ public class Student {
     @JoinColumn(name = "account_id")
     private Account account;
 
+
+
     private String area; //사는 곳
     private String admission; //입학일
     private String subject;
     private String teacherStyle; // 원하는 선생님의 성향
-    private String money; //지불하기를 원하는 금액
+    private int money; //지불하기를 원하는 금액
 
 
     public static Student createStudent(StudentInfoDto studentInfoDto) {
@@ -36,8 +38,6 @@ public class Student {
         student.setAdmission(studentInfoDto.getAdmission());
         student.setSubject(studentInfoDto.getSubject());
         student.setTeacherStyle(studentInfoDto.getTeacherStyle());
-
-
         student.setMoney(studentInfoDto.getMoney());
 
         return student;
