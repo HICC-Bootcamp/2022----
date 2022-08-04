@@ -33,8 +33,5 @@ public class Connection {
         return connection;
     }
 
-    public static Connection addTeacherReply(TeacherReplyDto teacherReplyDto){
-
-    }
 
 }

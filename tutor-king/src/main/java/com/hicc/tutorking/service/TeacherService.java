@@ -1,5 +1,6 @@
 package com.hicc.tutorking.service;
 
+import com.hicc.tutorking.dto.TeacherReplyDto;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeacherService {
     private final StudentRepository studentRepository;
+
     private final TeacherRepository teacherRepository;
 
     private final ConnectionRepository connectionRepository;
@@ -25,13 +27,27 @@ public class TeacherService {
         return teacherRepository.save(teacher);
     }
 
-    public List<Connection> getStudentWhoAsked(String teacherEmail){
+    public List<Student> InfoStudentWhoAsked(String teacherEmail){
         List<Connection> connections=connectionRepository.findByEmail(teacherEmail);
-        return connections;
+        List<Student> studentList=new ArrayList<>();
+        for(int i=0;i<connections.size();i++){
+            Connection temp=connections.get(i);
+            String studentEmail= temp.getStudentEmail();
+
+            Student studentWhoAsked= studentRepository.findByEmail(studentEmail);
+            studentList.add(studentWhoAsked);
+        }
+
+        return studentList;
 
     }
 
-    public List<Connection> getTeacherReply(String Boolean teacherReply){
+    public List<Connection> EmailStudentWhoAsked(String teacherEmail){
+        List<Connection> connections=connectionRepository.findByEmail(teacherEmail);
+        return connections;
+    }
+    public List<Connection> getTeacherReply(TeacherReplyDto teacherReplyDto){
+
 
     }
 }
