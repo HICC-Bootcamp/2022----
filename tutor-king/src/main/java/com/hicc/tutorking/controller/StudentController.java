@@ -63,12 +63,11 @@ public class StudentController {
     }
 
     @GetMapping(value = {"/connections/matching"}) // 학생의 매칭 부분으로 들어감
-    public String studentMatch(Principal principal, @PathVariable("page")
-    Optional<Integer> page, Model model) {
+    public String studentMatch(Principal principal, Model model) {
         String studentEmail = principal.getName();
         studentService.suggest(studentEmail);
 
-        List<Teacher> teachers = studentService.getTeacherPage();
+        List<Teacher> teachers = studentService.getTeacherList();
         model.addAttribute("teachers", teachers);//TODO:프론트엔드에 학생 인포에 맞는 선생님 리스트가 넘어감
 
         model.addAttribute("connectionDto", new ConnectionDto());//TODO:프론트엔드가 학생이 고른 선생님의 이메일을 백엔드로 줌

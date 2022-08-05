@@ -53,7 +53,7 @@ public class TeacherController {
         return "teacher/teacher_main";
     }
 
-    @GetMapping(value = "/connections/checks") // 여기로 가게 해주세용
+    @GetMapping(value = "/connections/checks")
     public String teacherConnection(Principal principal, Model model) {
         String teacherEmail = principal.getName();
 

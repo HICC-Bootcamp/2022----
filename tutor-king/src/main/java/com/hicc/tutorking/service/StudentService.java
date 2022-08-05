@@ -76,7 +76,7 @@ public class StudentService {
     }
 
     @Transactional(readOnly = true)
-    public List<Teacher> getTeacherPage() {
+    public List<Teacher> getTeacherList() {
         return teacherRepository.findAll();
     }
 
