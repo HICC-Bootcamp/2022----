@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching Success</title>
+    <title>Matching Failed</title>
 
     <link href="/css/matching/matching.css" th:href="@{/css/matching/matching.css}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -14,7 +14,7 @@
 <body style="overflow-x: hidden">
     <div class="text-center">
         <div class="md-3">
-            <h1 class="fw-bold">매칭이 성공되었습니다!</h1>
+            <h1 class="fw-bold">매칭 요청이 거절되었습니다.</h1>
             <br><br>
         </div>    
     </div>
@@ -34,7 +34,7 @@
         <hr class="col-3">
     </div>
     
-    <form th:action="@{}" method="post" th:object="${}">
+    <form th:action="@{}" method="post" th:object="${connectionDto}">
     <div class="row justify-content-center">
         <div class="col-3">
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-400 position-relative">
@@ -42,10 +42,6 @@
               <strong class="d-inline-block mb-2 text-primary">
                 <span th:text="${Teacher.university}">홍익대학교</span>
                 <span th:text="${Teacher.major}"></span>컴퓨터공학과</strong>
-                  <h4 style="font-weight: 200"> 
-                    <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${Teacher.name}">이름: 김홍익</p>
-                    <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${Teacher.phoneNumber}">연락처: 01012345678</p>
-                  </h4>
                 <h5 style="font-weight: 800"> 
                   <p th:text="'지역: ' + ${Teacher.area}">지역: 서울</p>
                   <p th:text="'나이: ' + ${Teacher.age}">나이: 27세</p>
@@ -60,9 +56,9 @@
           </div>
         </div>
 
-        <div class="col-1" style="margin-left: 23px;">
+        <div class="col-1" style="margin-left: 20px;">
           <br><br><br><br><br>
-          <img class="md-4" src="/img/connect/verified.png" alt="" width="100" height="100">
+          <img class="md-4" src="/img/connect/failed.png" alt="" width="100" height="100">
         </div>
 
         <div class="col-3">
@@ -70,10 +66,6 @@
               <div class="col p-3 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary">
                   <span th:text="${Student.grade}"></span>고등학교 3학년</strong>
-                  <h4 style="font-weight: 200"> 
-                    <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${Student.name}">이름: 김홍익</p>
-                    <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${Student.phoneNumber}">연락처: 01012345678</p>
-                  </h4>
                   <h5 style="font-weight: 800"> 
                     <p th:text="'지역: ' + ${Student.area}">지역: 서울</p>
                     <p th:text="'성향: ' + $Student.style}">성향: 열정적인</p>
@@ -85,6 +77,6 @@
           </div>
       </div>
     </form>
-    <a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'" th:onClick="|location.href='@{auth/login'}'|">로그아웃</a>
+  <a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'" th:onClick="|location.href='@{auth/login'}'|">로그아웃</a>
 </body>
 </html>

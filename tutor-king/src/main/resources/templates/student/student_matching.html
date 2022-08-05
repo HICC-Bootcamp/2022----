@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching_student</title>
+    <title>Matching</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css}" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="/static/css/matching/matching.css" th:href="@{/static/css/matching/matching.css}" rel="stylesheet">
+    <link href="/css/matching/matching.css" th:href="@{/css/matching/matching.css}" rel="stylesheet">
     
 </head>
 <body style="overflow-x: hidden">
@@ -24,27 +24,27 @@
   <form th:action="@{matching}" method="post" th:object="${}">
     <div class="container">
       <div class="row row-cols-2">
-        <div class="col-md-6" th:each="Teacher : ${Teacher}">
+        <div class="col-md-6" th:each="teachers : ${teachers}">
           <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
               <strong class="d-inline-block mb-2 text-primary">
-                <span th:text="${Teacher.university}">홍익대학교</span>
-                <span th:text="${Teacher.major}">컴퓨터공학과</span>
-                <span class="badge rounded-pill bg-info text-light" th:text="${Teacher.tagNumber}">5</span></strong>
+                <span th:text="${teachers.university}">홍익대학교</span>
+                <span th:text="${teachers.major}">컴퓨터공학과</span>
+                <span class="badge rounded-pill bg-info text-light" th:text="${teachers.tagNumber}">5</span></strong>
                 <h4> 
-                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${Teacher.area}">서울</span>
-                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${Teacher.age}">#27세</span>
-                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${Teacher.style}">#열정적인</span>
-                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${Teacher.subject}">#국어</span>
-                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${Teacher.wage}">#20000원</span>
+                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${teachers.area}">서울</span>
+                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${teachers.age}">#27세</span>
+                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${teachers.style}">#열정적인</span>
+                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${teachers.subject}">#국어</span>
+                  <span class="badge rounded-pill bg-primary" th:text="'#' + ${teachers.wage}">#20000원</span>
 
                 </h4>
                 <br>
-              <p class="card-text" th:text="${Teacher.experience}">
+              <p class="card-text" th:text="${teachers.experience}">
                 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개
               </p>
               <div class="d-md-flex justify-content-md-end">
-                <button class="btn btn-primary w-25" type="submit">매칭</button>
+                <input type="button" class="btn btn-primary w-25" value="매칭" th:field="*{teachers.email}" this.onclick='';></input>
             </div>  
             </div>
           </div>
@@ -52,6 +52,7 @@
       </div>
     </div>
   </form>
+  <a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'" th:onClick="|location.href='@{auth/login'}'|">로그아웃</a>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
