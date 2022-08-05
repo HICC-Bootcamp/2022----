@@ -32,13 +32,15 @@ public class TeacherController {
     }
 
     @PostMapping(value = "/info")
-    public String newTeacherInfo(@Valid TeacherInfoDto teacherInfoDto, BindingResult bindingResult, Model model) {
+    public String newTeacherInfo(@Valid TeacherInfoDto teacherInfoDto, BindingResult bindingResult,
+                                 Model model,Principal principal) {
         if (bindingResult.hasErrors()) {
             return "teacher/teacher_info";
         }
 
         try {
-            Teacher teacher = Teacher.createTeacher(teacherInfoDto);
+            String teacherEmail=principal.getName();
+            Teacher teacher = Teacher.createTeacher(teacherInfoDto,teacherEmail);
             teacherService.saveTeacher(teacher);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -58,15 +60,35 @@ public class TeacherController {
         String teacherEmail = principal.getName();
 
         List<Student> InfoStudentWhoAsked = teacherService.InfoStudentWhoAsked(teacherEmail);
-        List<Connection> EmailStudentWhoAsked = teacherService.EmailStudentWhoAsked(teacherEmail);
 
-        model.addAttribute("StudentWhoAskedInfo", InfoStudentWhoAsked); //우리가 넘겨주는 거 선생님한테 매칭을 요청한 학생들의 정보들
-        model.addAttribute("EmailStudentWhoAsked", EmailStudentWhoAsked); //우리가 넘겨주는 거 선생님한테 매칭을 요청한 학생들의 이메일주소
+
+        model.addAttribute("StudentWhoAskedInfo", InfoStudentWhoAsked); //선생님한테 매칭을 요청한 학생들의 정보들
+
         model.addAttribute("teacherReplyDto", new TeacherReplyDto());//우리가 프론트엔드에 학생이메일이랑 수락 정보를 받음
 
         return "teacher/teacher_matching";
 
     }
+    @PostMapping(value = "/connections/checks")
+    public String teacherConnection(Principal principal, TeacherReplyDto teacherReplyDto,
+                                    BindingResult bindingResult, Model model) {
+
+        String teacherEmail = principal.getName();
+        teacherService.AddTeacherReply(teacherEmail, teacherReplyDto);
+
+        if (bindingResult.hasErrors()) {
+            return "teacher/teacher_matching";
+        }
+
+        return "redirect:/teachers/connections/checks";
+
+    }
+
+
+
+
+
+    //String ShowStudentNumber(teacherReplyDto)
 
     //TODO: !!!프론트엔드!!!
     // 선생님 버전; 선생님한테 매칭을 요청한 학생들의 정보와 이메일을 백엔드가 프론트에게 줌.("StudentWhoAskedInfo","EmailStudentWhoAsked")
@@ -82,19 +104,7 @@ public class TeacherController {
 
 
     //TODO:프론트엔드에서 선생님은 학생 수락이나 거절이나 버튼 누르면 그 버튼들을 다신 못 누르게 했으면 좋겠습니당
-    @PostMapping(value = "/connections/checks")
-    public String teacherConnection(Principal principal, TeacherReplyDto teacherReplyDto,
-                                    BindingResult bindingResult, Model model) {
-
-        String teacherEmail = principal.getName();
-        teacherService.AddTeacherReply(teacherEmail, teacherReplyDto);
-
-        if (bindingResult.hasErrors()) {
-            return "teacher/teacher_matching";
-        }
-
-        return "redirect:/teachers/connections/checks";
 
 
-    }
+
 }

@@ -21,6 +21,8 @@ public class Connection {
     private String studentEmail;
     private String teacherEmail;
     private Boolean teacherReply;
+    private String studentPhoneNumber;
+    private String teacherPhoneNumber;
 
     public static Connection createConnection(String studentEmail, ConnectionDto connectionDto) {
         Connection connection = new Connection();

@@ -24,7 +24,7 @@ public class Teacher {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id")
     private Account account;
-
+    private String teacherEmail;
     private String area;
     private String age;
     private String style;
@@ -37,10 +37,11 @@ public class Teacher {
     private String experience;
     private int hashtag;
 
-    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto) {
+    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto,String teacherEmail) {
         Teacher teacher = new Teacher();
         teacher.setArea(teacherInfoDto.getArea());
         teacher.setAge(teacherInfoDto.getAge());
+        teacher.setTeacherEmail(teacherEmail);
         teacher.setStyle(teacherInfoDto.getStyle());
         teacher.setSubject(teacherInfoDto.getSubject());
         teacher.setTarget(teacherInfoDto.getTarget());

@@ -1,5 +1,6 @@
 package com.hicc.tutorking.service;
 
+import com.hicc.tutorking.dto.PhoneNumberDto;
 import com.hicc.tutorking.dto.TeacherReplyDto;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
@@ -43,15 +44,13 @@ public class TeacherService {
 
     }
 
-    public List<Connection> EmailStudentWhoAsked(String teacherEmail) {
-        List<Connection> connections = connectionRepository.findByTeacherEmail(teacherEmail);
-        return connections;
-    }
-
     public void AddTeacherReply(String teacherEmail, TeacherReplyDto teacherReplyDto) {
 
         Connection connection = connectionRepository.findByStudentEmail(teacherReplyDto.getStudentEmail());
         connection.setTeacherReply(teacherReplyDto.getTeacherReply());
 
     }
+
+
+
 }

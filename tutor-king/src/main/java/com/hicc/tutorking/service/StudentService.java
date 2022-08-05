@@ -1,12 +1,17 @@
 package com.hicc.tutorking.service;
 
+import com.hicc.tutorking.dto.ConnectionDto;
+import com.hicc.tutorking.dto.TeacherReplyDto;
+import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
+import com.hicc.tutorking.repository.AccountRepository;
 import com.hicc.tutorking.repository.ConnectionRepository;
 import com.hicc.tutorking.repository.StudentRepository;
 import com.hicc.tutorking.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final AccountRepository accountRepository;
 
     private final ConnectionRepository connectionRepository;
     private final TeacherRepository teacherRepository;
@@ -77,8 +83,36 @@ public class StudentService {
 
     @Transactional(readOnly = true)
     public List<Teacher> getTeacherList() {
-        return teacherRepository.findAll();
+        return teacherRepository.findAll(Sort.by(Sort.Direction.DESC, "hashtag"));
+    }
+
+    public Connection checkConnection(String studentEmail) {
+        Connection connection = connectionRepository.findByStudentEmail(studentEmail);
+        return connection;
+    }
+
+    public void setPhoneNumbers(String studentEmail, ConnectionDto connectionDto) {
+        Account student = accountRepository.findByEmail(studentEmail);
+        Account teacher = accountRepository.findByEmail(connectionDto.getTeacherEmail());
+        connectionDto.setStudentPhoneNumber(student.getPhoneNumber());
+        connectionDto.setTeacherPhoneNumber(teacher.getPhoneNumber());
+
+    }
+
+    public Student getStudentInfo(String studentEmail){
+        Student student=studentRepository.findByEmail(studentEmail);
+        return student;
+    }
+
+    public Teacher getTeacherInfo(String studentEmail){
+        Connection connection=connectionRepository.findByStudentEmail(studentEmail);
+        Teacher teacher=teacherRepository.findByEmail(connection.getTeacherEmail());
+        return teacher;
     }
 
 
 }
+
+
+
+
