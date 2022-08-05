@@ -12,10 +12,10 @@
           th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!--
+
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-    -->
+
 
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -122,10 +122,10 @@
                         <label for="money">과외비용(시급)</label>
                         <select class="custom-select d-block w-100" id="money" th:field="*{money}" required>
                             <option th:value="''" selected disabled>>과외비용(시급)을 선택해주세요.</option>
-                            <option th:value="'10000'">1만원 대</option>
-                            <option th:value="'20000'">2만원 대</option>
-                            <option th:value="'30000'">3만원 대</option>
-                            <option th:value="'40000'">4만원 대 이상</option>
+                            <option th:value="10000">1만원 대</option>
+                            <option th:value="20000">2만원 대</option>
+                            <option th:value="30000">3만원 대</option>
+                            <option th:value="40000">4만원 대 이상</option>
                         </select>
                         <div class="invalid-feedback">
                             과외비용(시급)을 선택해주세요.

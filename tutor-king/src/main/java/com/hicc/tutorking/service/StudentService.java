@@ -65,9 +65,11 @@ public class StudentService {
             if (teacher.getTarget().equals(student.getAdmission())) {
                 same++;
             }
+
             if (teacher.getWage() <= (student.getMoney()) + 9999) {
                 same++;
             }
+
             teacher.setHashtag(same);
         }
 

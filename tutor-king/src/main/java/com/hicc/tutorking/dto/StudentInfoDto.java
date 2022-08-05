@@ -24,8 +24,8 @@ public class StudentInfoDto {
     @NotBlank(message = "원하는 선생님의 성향은 필수 입력 값입니다.")
     private String teacherStyle; // 원하는 선생님의 성향
 
-    @NotBlank(message = "희망 과외비는 필수 입력 값입니다.")
-    private int money;
+    @PositiveOrZero(message = "지불을 원하는 시급을 선택해주세요 ")
+    private Integer money;
 
 /*
     private static ModelMapper modelMapper = new ModelMapper();

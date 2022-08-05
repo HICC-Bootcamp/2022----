@@ -28,12 +28,12 @@ public class Student {
     private String admission; //입학일
     private String subject;
     private String teacherStyle; // 원하는 선생님의 성향
-    private int money; //지불하기를 원하는 금액
+    private Integer money; //지불하기를 원하는 금액
 
-    public static Student createStudent(StudentInfoDto studentInfoDto) {
+    public static Student createStudent(StudentInfoDto studentInfoDto,String studentEmail) {
         Student student = new Student();
         student.setArea(studentInfoDto.getArea());
-
+        student.setStudentEmail(studentEmail);
         student.setAdmission(studentInfoDto.getAdmission());
         student.setSubject(studentInfoDto.getSubject());
         student.setTeacherStyle(studentInfoDto.getTeacherStyle());

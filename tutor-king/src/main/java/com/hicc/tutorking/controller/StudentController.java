@@ -36,14 +36,15 @@ public class StudentController {
     }
 
     @PostMapping(value = "/info")
-    public String newStudentInfo(@Valid StudentInfoDto studentInfoDto, BindingResult bindingResult, Model model) {
+    public String newStudentInfo(@Valid StudentInfoDto studentInfoDto, BindingResult bindingResult,
+                                 Model model,Principal principal) {
         if (bindingResult.hasErrors()) {
             return "student/student_info";
         }
 
         try {
-            //String studentEmail = principal.getName();
-            Student student = Student.createStudent(studentInfoDto);
+            String studentEmail = principal.getName();
+            Student student = Student.createStudent(studentInfoDto,studentEmail);
             studentService.saveStudent(student);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -51,7 +52,7 @@ public class StudentController {
         }
 
 
-        return "redirect:/";
+        return "redirect:/students/connections";
     }
 
     @GetMapping(value = "/connections") //TODO:학생의 메인페이지, 버튼을 눌러서 매칭으로 들어갈건지 요청한 매칭 확인 부분으로
@@ -60,8 +61,6 @@ public class StudentController {
         studentService.resetHashtag(); //TODO:이거 좀 하.. 일단 메인 열릴때마다 해시태그 리셋되게 함.. 로그아웃되면 리셋되게 하고 싶음(백엔드)
         return "student/student_main";
     }
-
-
 
     @GetMapping(value = {"/connections/matching"}) // 학생의 매칭 부분으로 들어감
     public String studentMatch(Principal principal, @PathVariable("page")
