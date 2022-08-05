@@ -42,6 +42,7 @@ public class StudentController {
         }
 
         try {
+            //String studentEmail = principal.getName();
             Student student = Student.createStudent(studentInfoDto);
             studentService.saveStudent(student);
         } catch (Exception e) {

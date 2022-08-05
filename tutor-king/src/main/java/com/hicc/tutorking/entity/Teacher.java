@@ -32,7 +32,8 @@ public class Teacher {
     private String target;
     private String university;
     private String major;
-    private int wage;
+    private Integer wage;
+    
     private String experience;
     private int hashtag;
 

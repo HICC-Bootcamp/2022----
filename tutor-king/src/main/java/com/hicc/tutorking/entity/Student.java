@@ -22,6 +22,8 @@ public class Student {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    private String studentEmail;
+
     private String area; //사는 곳
     private String admission; //입학일
     private String subject;

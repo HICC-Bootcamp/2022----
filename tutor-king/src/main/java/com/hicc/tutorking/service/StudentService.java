@@ -75,7 +75,7 @@ public class StudentService {
 
     @Transactional(readOnly = true)
     public List<Teacher> getTeacherPage() {
-        return teacherRepository.findOrderByHashtagDesc();
+        return teacherRepository.findAll();
     }
 
 

@@ -45,7 +45,7 @@ public class TeacherController {
             return "teacher/teacher_info";
         }
 
-        return "redirect:/";
+        return "redirect:/teachers/connections";
     }
 
     @GetMapping(value = "/connections")
