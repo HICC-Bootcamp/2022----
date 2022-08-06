@@ -59,9 +59,11 @@
                         <p class="card-text" th:text="${teachers.experience}">
                             경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개
                         </p>
+                        <div class="d-md-flex justify-content-md-end">
                         <input type="hidden" th:id="'teacherEmail'+${index.count}" th:value="${teachers.teacherEmail}"
                                name="teacherEmail">
                         <input type="submit" class="btn btn-primary w-25" th:id="'button'+${index.count}">
+                        </div>
                     </form>
                 </div>
             </div>
