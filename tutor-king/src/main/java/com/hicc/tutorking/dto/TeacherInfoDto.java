@@ -1,10 +1,8 @@
 package com.hicc.tutorking.dto;
 
-import com.hicc.tutorking.entity.Teacher;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.modelmapper.ModelMapper;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;

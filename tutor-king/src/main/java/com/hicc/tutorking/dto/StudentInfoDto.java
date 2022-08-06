@@ -12,7 +12,7 @@ public class StudentInfoDto {
 
     private Long id;
 
-    @NotBlank(message="거주 지역은 필수 입력 값입니다.")
+    @NotBlank(message = "거주 지역은 필수 입력 값입니다.")
     private String area;
 
     @NotBlank(message = "입학일은 필수 입력 값입니다.")
@@ -26,19 +26,5 @@ public class StudentInfoDto {
 
     @PositiveOrZero(message = "지불을 원하는 시급을 선택해주세요 ")
     private Integer money;
-
-/*
-    private static ModelMapper modelMapper = new ModelMapper();
-
-    public Student createStudent(){
-        return modelMapper.map(this,Student.class);
-    }
-
-    public static StudentInfoDto of (Student student){
-        return modelMapper.map(student,StudentInfoDto.class);
-    }
-
-*/
-
 
 }

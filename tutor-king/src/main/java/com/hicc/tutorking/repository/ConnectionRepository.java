@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface ConnectionRepository extends JpaRepository<Connection, Long> {
     List<Connection> findByTeacherEmail(String teacherEmail);
-
     Connection findByStudentEmail(String studentEmail);
 }

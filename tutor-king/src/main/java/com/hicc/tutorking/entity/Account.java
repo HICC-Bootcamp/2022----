@@ -45,9 +45,6 @@ public class Account {
         } else if ((accountFormDto.getRole()).equals("teacher")) {
             account.setRole(Role.TEACHER);
         }
-
         return account;
-
     }
-
 }

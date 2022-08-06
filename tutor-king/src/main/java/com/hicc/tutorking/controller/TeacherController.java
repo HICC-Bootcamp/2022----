@@ -34,15 +34,15 @@ public class TeacherController {
 
     @PostMapping(value = "/info")
     public String newTeacherInfo(@Valid TeacherInfoDto teacherInfoDto, BindingResult bindingResult,
-                                 Model model,Principal principal) {
+                                 Model model, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "teacher/teacher_info";
         }
 
         try {
-            String teacherEmail=principal.getName();
-            Account account=teacherService.getAccount(teacherEmail);
-            Teacher teacher = Teacher.createTeacher(teacherInfoDto,teacherEmail,account);
+            String teacherEmail = principal.getName();
+            Account account = teacherService.getAccount(teacherEmail);
+            Teacher teacher = Teacher.createTeacher(teacherInfoDto, teacherEmail, account);
             teacherService.saveTeacher(teacher);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -69,6 +69,7 @@ public class TeacherController {
         return "teacher/teacher_matching";
 
     }
+
     @PostMapping(value = "/connections/checks")
     public String teacherConnection(Principal principal, TeacherReplyDto teacherReplyDto,
                                     BindingResult bindingResult, Model model) {
@@ -80,10 +81,9 @@ public class TeacherController {
             return "teacher/teacher_matching";
         }
 
-        if(teacherReplyDto.getTeacherReply().equals("수락"))
-        {
-            return "redirect:/teachers/connections/success";}
-        else if (teacherReplyDto.getTeacherReply().equals("거절")) {
+        if (teacherReplyDto.getTeacherReply().equals("수락")) {
+            return "redirect:/teachers/connections/success";
+        } else if (teacherReplyDto.getTeacherReply().equals("거절")) {
             model.addAttribute("errorMessage", "거절했습니다.");
             return "teacher/teacher_matching";
         }
@@ -91,18 +91,13 @@ public class TeacherController {
 
     }
 
-    @GetMapping(value="/connections/success")
-    public String teacherMatchingSuccess(Principal principal, Model model){
-        String teacherEmail= principal.getName();
-        Teacher teacherInfo=teacherService.getTeacherInfo(teacherEmail);
-        Student studentInfo=teacherService.getStudentInfo(teacherEmail);
-        model.addAttribute("teacherInfo",teacherInfo);
-        model.addAttribute("studentInfo",studentInfo);
+    @GetMapping(value = "/connections/success")
+    public String teacherMatchingSuccess(Principal principal, Model model) {
+        String teacherEmail = principal.getName();
+        Teacher teacherInfo = teacherService.getTeacherInfo(teacherEmail);
+        Student studentInfo = teacherService.getStudentInfo(teacherEmail);
+        model.addAttribute("teacherInfo", teacherInfo);
+        model.addAttribute("studentInfo", studentInfo);
         return "connect/connect_success";
     }
-
-
-
-
-
 }

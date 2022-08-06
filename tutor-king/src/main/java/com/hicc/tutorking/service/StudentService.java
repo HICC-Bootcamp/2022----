@@ -56,7 +56,7 @@ public class StudentService {
 
         for (int i = 0; i < teachers.size(); i++) {
             Teacher teacher = teachers.get(i);
-            int same = 0; //몇 개가 맞는지
+            int same = 0;
 
             if (teacher.getArea().equals(student.getArea())) {
                 same++;
@@ -64,7 +64,7 @@ public class StudentService {
             if (teacher.getStyle().equals(student.getTeacherStyle())) {
                 same++;
             }
-            if(teacher.getTarget().equals(student.getAdmission())){
+            if (teacher.getTarget().equals(student.getAdmission())) {
                 same++;
             }
             if ((teacher.getSubject().equals(student.getSubject()))) {
@@ -98,25 +98,25 @@ public class StudentService {
     }
 
     public void notAsk(String studentEmail) {
-        Connection connection=connectionRepository.findByStudentEmail(studentEmail);
+        Connection connection = connectionRepository.findByStudentEmail(studentEmail);
         if (connection == null) {
             throw new NullPointerException("아직 요청한 내역이 없습니다..");
         }
     }
 
-    public Student getStudentInfo(String studentEmail){
-        Student student=studentRepository.findByStudentEmail(studentEmail);
+    public Student getStudentInfo(String studentEmail) {
+        Student student = studentRepository.findByStudentEmail(studentEmail);
         return student;
     }
 
-    public Teacher getTeacherInfo(String studentEmail){
-        Connection connection=connectionRepository.findByStudentEmail(studentEmail);
-        Teacher teacher=teacherRepository.findByTeacherEmail(connection.getTeacherEmail());
+    public Teacher getTeacherInfo(String studentEmail) {
+        Connection connection = connectionRepository.findByStudentEmail(studentEmail);
+        Teacher teacher = teacherRepository.findByTeacherEmail(connection.getTeacherEmail());
         return teacher;
     }
 
-    public Account getAccount(String studentEmail){
-        Account account=accountRepository.findByEmail(studentEmail);
+    public Account getAccount(String studentEmail) {
+        Account account = accountRepository.findByEmail(studentEmail);
         return account;
     }
 

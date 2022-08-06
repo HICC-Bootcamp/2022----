@@ -40,7 +40,6 @@ public class AccountService implements UserDetailsService {
         else return "not exist";
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 

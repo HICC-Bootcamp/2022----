@@ -6,7 +6,6 @@ import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
-import com.hicc.tutorking.repository.TeacherRepository;
 import com.hicc.tutorking.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -44,8 +43,8 @@ public class StudentController {
 
         try {
             String studentEmail = principal.getName();
-            Account account=studentService.getAccount(studentEmail);
-            Student student = Student.createStudent(studentInfoDto, studentEmail,account);
+            Account account = studentService.getAccount(studentEmail);
+            Student student = Student.createStudent(studentInfoDto, studentEmail, account);
             studentService.saveStudent(student);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -136,8 +135,6 @@ public class StudentController {
         model.addAttribute("studentInfo", studentInfo);
         return "student/student_failed";
     }
-
-
 }
 
 

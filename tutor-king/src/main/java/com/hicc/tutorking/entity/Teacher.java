@@ -1,7 +1,6 @@
 package com.hicc.tutorking.entity;
 
 
-import com.hicc.tutorking.dto.StudentInfoDto;
 import com.hicc.tutorking.dto.TeacherInfoDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +20,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(fetch=FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
     private String teacherEmail;
@@ -33,11 +32,11 @@ public class Teacher {
     private String university;
     private String major;
     private Integer wage;
-    
+
     private String experience;
     private int hashtag;
 
-    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto,String teacherEmail,Account account) {
+    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto, String teacherEmail, Account account) {
         Teacher teacher = new Teacher();
         teacher.setArea(teacherInfoDto.getArea());
         teacher.setAge(teacherInfoDto.getAge());
@@ -52,8 +51,5 @@ public class Teacher {
         teacher.setHashtag(0);
         teacher.setAccount(account);
         return teacher;
-
     }
-
-
 }
