@@ -1,10 +1,8 @@
 package com.hicc.tutorking.dto;
 
-import com.hicc.tutorking.entity.Teacher;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.modelmapper.ModelMapper;
 
 import javax.persistence.Lob;
 import javax.validation.constraints.NotBlank;
@@ -39,12 +37,13 @@ public class TeacherInfoDto {
     private String major;
 
     @PositiveOrZero(message = "숫자를 입력해주세요. ")
-    @NotBlank(message = "희망 과외비는 필수 입력 값입니다.")
-    private String wage;
+    private Integer wage;
 
     @Lob
-    @Length(min = 0, max = 100, message = "100자 이내로 입력해주세요.")
+    @NotBlank(message = "자신의 경력 및 소개는 필수 입력 값입니다. ")
+    @Length(max = 100, message = "100자 이내로 입력해주세요.")
     private String experience;
+
     /*
 
     private static ModelMapper modelMapper = new ModelMapper();

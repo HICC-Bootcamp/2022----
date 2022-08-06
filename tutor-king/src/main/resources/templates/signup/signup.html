@@ -24,7 +24,7 @@
     <div class="input-form-background row">
         <div class="input-form col-md-6 mx-auto">
             <h4 class="text-center">회원가입</h4>
-            <form th:action="@{signup}"role="form" method="post" th:object="${accountFormDto}" >
+            <form th:action="@{signup}" role="form" method="post" th:object="${accountFormDto}">
                 <div class="text-center">
                     <input type="radio" name="role" id="type1" value="student" th:field="*{role}">
                     <label for="type1">학생</label>
