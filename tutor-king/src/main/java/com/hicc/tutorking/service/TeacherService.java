@@ -30,13 +30,14 @@ public class TeacherService {
     }
 
     public List<Student> InfoStudentWhoAsked(String teacherEmail) {
+
         List<Connection> connections = connectionRepository.findByTeacherEmail(teacherEmail);
         List<Student> studentList = new ArrayList<>();
         for (int i = 0; i < connections.size(); i++) {
             Connection temp = connections.get(i);
             String studentEmail = temp.getStudentEmail();
 
-            Student studentWhoAsked = studentRepository.findByEmail(studentEmail);
+            Student studentWhoAsked = studentRepository.findByStudentEmail(studentEmail);
             studentList.add(studentWhoAsked);
         }
 
@@ -50,6 +51,21 @@ public class TeacherService {
         connection.setTeacherReply(teacherReplyDto.getTeacherReply());
 
     }
+
+    public Teacher getTeacherInfo(String teacherEmail){
+        Teacher teacher=teacherRepository.findByEmail(teacherEmail);
+        return teacher;
+    }
+
+
+    public Student getStudentInfo(String teacherEmail){
+        List<Connection> connection= connectionRepository.findByTeacherEmail(teacherEmail);
+        Student student=studentRepository.findByEmail(connection.get(0).getStudentEmail());
+        return student;
+    }
+
+
+
 
 
 

@@ -61,9 +61,7 @@ public class TeacherController {
 
         List<Student> InfoStudentWhoAsked = teacherService.InfoStudentWhoAsked(teacherEmail);
 
-
-        model.addAttribute("StudentWhoAskedInfo", InfoStudentWhoAsked); //선생님한테 매칭을 요청한 학생들의 정보들
-
+        model.addAttribute("studentInfo", InfoStudentWhoAsked); //선생님한테 매칭을 요청한 학생들의 정보들
         model.addAttribute("teacherReplyDto", new TeacherReplyDto());//우리가 프론트엔드에 학생이메일이랑 수락 정보를 받음
 
         return "teacher/teacher_matching";
@@ -80,13 +78,17 @@ public class TeacherController {
             return "teacher/teacher_matching";
         }
 
-        return "redirect:/teachers/connections/checks";
+        return "redirect:/teachers/connections";
 
     }
 
-
-
-
+    @GetMapping(value="/connections/success")
+    public String teacherMatchingSuccess(Principal principal, Model model){
+        String teacherEmail= principal.getName();
+        teacherService.getTeacherInfo(teacherEmail);
+        teacherService.getStudentInfo(teacherEmail);
+        return "connect/connect_success";
+    }
 
     //String ShowStudentNumber(teacherReplyDto)
 

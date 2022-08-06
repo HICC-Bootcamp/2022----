@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -23,6 +24,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class StudentController {
+
 
     private final StudentService studentService;
     private final TeacherRepository teacherRepository;
@@ -53,10 +55,10 @@ public class StudentController {
         return "redirect:/students/connections";
     }
 
-    @GetMapping(value = "/connections") //TODO:학생의 메인페이지, 버튼을 눌러서 매칭으로 들어갈건지 요청한 매칭 확인 부분으로
+    @GetMapping(value = "/connections")
     // 들어갈 건지는 프론트엔드에서 구현함(프론트)
     public String studentMain() {
-        studentService.resetHashtag(); //TODO:이거 좀 하.. 일단 메인 열릴때마다 해시태그 리셋되게 함.. 로그아웃되면 리셋되게 하고 싶음(백엔드)
+        studentService.resetHashtag();
         return "student/student_main";
     }
 
@@ -94,15 +96,22 @@ public class StudentController {
         return "redirect:/students/connections"; //student 페이지 메인으로 돌아간다
     }
 
-    @GetMapping(value = "/connections/check")
+    @GetMapping(value = "/connections/checks")
     public String studentConnectionCheck(Principal principal, Model model) {
         String studentEmail = principal.getName();
-        Connection connection= studentService.checkConnection(studentEmail);
-        Student studentInfo=studentService.getStudentInfo(studentEmail);
-        Teacher teacherInfo=studentService.getTeacherInfo(studentEmail);
-        model.addAttribute("connection", connection);
-        model.addAttribute("studentInfo",studentInfo);
-        model.addAttribute("teacherInfo",teacherInfo);
+
+        try {
+            studentService.notAsk(studentEmail);
+            Connection connection = studentService.checkConnection(studentEmail);
+            Student studentInfo = studentService.getStudentInfo(studentEmail);
+            Teacher teacherInfo = studentService.getTeacherInfo(studentEmail);
+            model.addAttribute("connection", connection);
+            model.addAttribute("studentInfo", studentInfo);
+            model.addAttribute("teacherInfo", teacherInfo);
+        } catch (TemplateInputException | NullPointerException e) {
+
+            return "/student/student_notchoice";
+        }
 
         return "/student/student_waiting";
     }

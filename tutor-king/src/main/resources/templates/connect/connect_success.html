@@ -69,14 +69,14 @@
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-400 position-relative">
               <div class="col p-3 d-flex flex-column position-static">
                 <strong class="d-inline-block mb-2 text-primary">
-                  <span th:text="${Student.grade}"></span>고등학교 3학년</strong>
+                  <span th:text="${Student.admission}"></span>고등학교 3학년</strong>
                   <h4 style="font-weight: 200"> 
                     <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${Student.name}">이름: 김홍익</p>
                     <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${Student.phoneNumber}">연락처: 01012345678</p>
                   </h4>
                   <h5 style="font-weight: 800"> 
                     <p th:text="'지역: ' + ${Student.area}">지역: 서울</p>
-                    <p th:text="'성향: ' + $Student.style}">성향: 열정적인</p>
+                    <p th:text="'성향: ' + ${Student.style}">성향: 열정적인</p>
                     <p th:text="'과목: ' + ${Student.subject}">과목: 국어</p>
                     <p th:text="'시급: ' + ${Student.money}">시급: 1만원 대</p>
                   </h5>

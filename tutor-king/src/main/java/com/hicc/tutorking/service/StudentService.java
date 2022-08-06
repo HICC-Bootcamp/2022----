@@ -1,7 +1,6 @@
 package com.hicc.tutorking.service;
 
 import com.hicc.tutorking.dto.ConnectionDto;
-import com.hicc.tutorking.dto.TeacherReplyDto;
 import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
@@ -47,7 +46,7 @@ public class StudentService {
 
     public void suggest(String email) {
 
-        Student student = studentRepository.findByEmail(email);
+        Student student = studentRepository.findByStudentEmail(email);
         List<Teacher> teachers = teacherRepository.findAll();
 
         for (int i = 0; i < teachers.size(); i++) {
@@ -65,13 +64,12 @@ public class StudentService {
             if (teacher.getStyle().equals(student.getTeacherStyle())) {
                 same++;
             }
-            if ((teacher.getSubject().equals(student.getTeacherStyle()))) {
+            if(teacher.getTarget().equals(student.getAdmission())){
                 same++;
             }
-            if (teacher.getTarget().equals(student.getAdmission())) {
+            if ((teacher.getSubject().equals(student.getSubject()))) {
                 same++;
             }
-
             if (teacher.getWage() <= (student.getMoney()) + 9999) {
                 same++;
             }
@@ -99,14 +97,21 @@ public class StudentService {
 
     }
 
+    public void notAsk(String studentEmail) {
+        Connection connection=connectionRepository.findByStudentEmail(studentEmail);
+        if (connection == null) {
+            throw new NullPointerException("아직 요청한 내역이 없습니다..");
+        }
+    }
+
     public Student getStudentInfo(String studentEmail){
-        Student student=studentRepository.findByEmail(studentEmail);
+        Student student=studentRepository.findByStudentEmail(studentEmail);
         return student;
     }
 
     public Teacher getTeacherInfo(String studentEmail){
         Connection connection=connectionRepository.findByStudentEmail(studentEmail);
-        Teacher teacher=teacherRepository.findByEmail(connection.getTeacherEmail());
+        Teacher teacher=teacherRepository.findByTeacherEmail(connection.getTeacherEmail());
         return teacher;
     }
 

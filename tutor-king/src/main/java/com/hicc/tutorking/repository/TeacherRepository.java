@@ -13,4 +13,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
     @Query("SELECT te FROM Teacher te LEFT JOIN te.account acc WHERE acc.email = :email")
     Teacher findByEmail(String email);
 
+    Teacher findByTeacherEmail(String teacherEmail);
+
 }

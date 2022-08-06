@@ -20,7 +20,7 @@ public class Connection {
 
     private String studentEmail;
     private String teacherEmail;
-    private Boolean teacherReply;
+    private String teacherReply;
     private String studentPhoneNumber;
     private String teacherPhoneNumber;
 
@@ -28,7 +28,7 @@ public class Connection {
         Connection connection = new Connection();
         connection.setStudentEmail(studentEmail);
         connection.setTeacherEmail(connectionDto.getTeacherEmail());
-        connection.setTeacherReply(null);
+        connection.setTeacherReply("미확인");
 
         return connection;
     }
