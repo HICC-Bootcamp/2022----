@@ -11,6 +11,7 @@
 - 로그인/로그아웃 기능
 - 회원가입 기능
 - 매칭 기능
+- 정보입력 기능
 ------------
 ### 📌 사용한 기술
 - Frontend : HTML, CSS, JavaScript, Thymeleaf, JQuery
