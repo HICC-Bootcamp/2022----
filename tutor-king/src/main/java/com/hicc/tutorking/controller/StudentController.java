@@ -2,6 +2,7 @@ package com.hicc.tutorking.controller;
 
 import com.hicc.tutorking.dto.ConnectionDto;
 import com.hicc.tutorking.dto.StudentInfoDto;
+import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
@@ -27,7 +28,6 @@ public class StudentController {
 
 
     private final StudentService studentService;
-    private final TeacherRepository teacherRepository;
 
     @GetMapping(value = "/info")
     public String studentForm(Model model) {
@@ -44,7 +44,8 @@ public class StudentController {
 
         try {
             String studentEmail = principal.getName();
-            Student student = Student.createStudent(studentInfoDto, studentEmail);
+            Account account=studentService.getAccount(studentEmail);
+            Student student = Student.createStudent(studentInfoDto, studentEmail,account);
             studentService.saveStudent(student);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());

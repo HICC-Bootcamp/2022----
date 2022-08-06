@@ -2,6 +2,7 @@ package com.hicc.tutorking.controller;
 
 import com.hicc.tutorking.dto.TeacherInfoDto;
 import com.hicc.tutorking.dto.TeacherReplyDto;
+import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
@@ -40,7 +41,8 @@ public class TeacherController {
 
         try {
             String teacherEmail=principal.getName();
-            Teacher teacher = Teacher.createTeacher(teacherInfoDto,teacherEmail);
+            Account account=teacherService.getAccount(teacherEmail);
+            Teacher teacher = Teacher.createTeacher(teacherInfoDto,teacherEmail,account);
             teacherService.saveTeacher(teacher);
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());

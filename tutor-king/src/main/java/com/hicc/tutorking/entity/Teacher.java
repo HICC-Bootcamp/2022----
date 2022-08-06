@@ -37,7 +37,7 @@ public class Teacher {
     private String experience;
     private int hashtag;
 
-    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto,String teacherEmail) {
+    public static Teacher createTeacher(TeacherInfoDto teacherInfoDto,String teacherEmail,Account account) {
         Teacher teacher = new Teacher();
         teacher.setArea(teacherInfoDto.getArea());
         teacher.setAge(teacherInfoDto.getAge());
@@ -50,6 +50,7 @@ public class Teacher {
         teacher.setWage(teacherInfoDto.getWage());
         teacher.setExperience(teacherInfoDto.getExperience());
         teacher.setHashtag(0);
+        teacher.setAccount(account);
         return teacher;
 
     }

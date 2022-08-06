@@ -30,7 +30,7 @@ public class Student {
     private String teacherStyle; // 원하는 선생님의 성향
     private Integer money; //지불하기를 원하는 금액
 
-    public static Student createStudent(StudentInfoDto studentInfoDto,String studentEmail) {
+    public static Student createStudent(StudentInfoDto studentInfoDto,String studentEmail,Account account) {
         Student student = new Student();
         student.setArea(studentInfoDto.getArea());
         student.setStudentEmail(studentEmail);
@@ -38,7 +38,7 @@ public class Student {
         student.setSubject(studentInfoDto.getSubject());
         student.setTeacherStyle(studentInfoDto.getTeacherStyle());
         student.setMoney(studentInfoDto.getMoney());
-
+        student.setAccount(account);
         return student;
 
     }

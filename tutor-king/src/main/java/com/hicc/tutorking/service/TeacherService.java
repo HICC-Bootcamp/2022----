@@ -2,9 +2,11 @@ package com.hicc.tutorking.service;
 
 
 import com.hicc.tutorking.dto.TeacherReplyDto;
+import com.hicc.tutorking.entity.Account;
 import com.hicc.tutorking.entity.Connection;
 import com.hicc.tutorking.entity.Student;
 import com.hicc.tutorking.entity.Teacher;
+import com.hicc.tutorking.repository.AccountRepository;
 import com.hicc.tutorking.repository.ConnectionRepository;
 import com.hicc.tutorking.repository.StudentRepository;
 import com.hicc.tutorking.repository.TeacherRepository;
@@ -20,9 +22,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeacherService {
     private final StudentRepository studentRepository;
-
+    private final AccountRepository accountRepository;
     private final TeacherRepository teacherRepository;
-
     public String currentStudentEmail;
     private final ConnectionRepository connectionRepository;
 
@@ -50,26 +51,25 @@ public class TeacherService {
 
         Connection connection = connectionRepository.findByStudentEmail(teacherReplyDto.getStudentEmail());
         connection.setTeacherReply(teacherReplyDto.getTeacherReply());
-        currentStudentEmail=teacherReplyDto.getStudentEmail();
-
+        currentStudentEmail = teacherReplyDto.getStudentEmail();
     }
 
-    public Teacher getTeacherInfo(String teacherEmail){
-        Teacher teacher=teacherRepository.findByTeacherEmail(teacherEmail);
+    public Teacher getTeacherInfo(String teacherEmail) {
+        Teacher teacher = teacherRepository.findByTeacherEmail(teacherEmail);
         return teacher;
     }
 
-    public Student getStudentInfo(String teacherEmail){
+    public Student getStudentInfo(String teacherEmail) {
 
-        Student student=studentRepository.findByStudentEmail(currentStudentEmail);
+        Student student = studentRepository.findByStudentEmail(currentStudentEmail);
 
         return student;
     }
 
-
-
-
-
+    public Account getAccount(String teacherEmail) {
+        Account account = accountRepository.findByEmail(teacherEmail);
+        return account;
+    }
 
 
 }

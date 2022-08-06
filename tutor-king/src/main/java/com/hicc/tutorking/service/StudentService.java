@@ -115,6 +115,11 @@ public class StudentService {
         return teacher;
     }
 
+    public Account getAccount(String studentEmail){
+        Account account=accountRepository.findByEmail(studentEmail);
+        return account;
+    }
+
 
 }
 

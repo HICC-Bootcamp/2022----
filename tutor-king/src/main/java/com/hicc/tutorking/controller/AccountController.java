@@ -43,7 +43,7 @@ public class AccountController {
                 return "redirect:/students/info";
             } else if (((accountService.CheckIdentity(account)).equals("teacher"))) {
                 return "redirect:/teachers/info";
-            } else return "redirect:/";
+            } else return "redirect:/main";
 
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
