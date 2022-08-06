@@ -85,7 +85,7 @@ public class TeacherController {
             return "redirect:/teachers/connections/success";
         } else if (teacherReplyDto.getTeacherReply().equals("거절")) {
             model.addAttribute("errorMessage", "거절했습니다.");
-            return "teacher/teacher_matching";
+            return "redirect:/teachers/connections/fail";
         }
         return "teacher/teacher_matching";
 
@@ -99,5 +99,15 @@ public class TeacherController {
         model.addAttribute("teacherInfo", teacherInfo);
         model.addAttribute("studentInfo", studentInfo);
         return "connect/connect_success";
+    }
+
+    @GetMapping(value = "/connections/fail")
+    public String teacherMatchingFail(Principal principal, Model model) {
+        String teacherEmail = principal.getName();
+        Teacher teacherInfo = teacherService.getTeacherInfo(teacherEmail);
+        Student studentInfo = teacherService.getStudentInfo(teacherEmail);
+        model.addAttribute("teacherInfo", teacherInfo);
+        model.addAttribute("studentInfo", studentInfo);
+        return "student/student_failed";
     }
 }

@@ -47,11 +47,12 @@
                     <span th:text="${teacherInfo.university}">홍익대학교</span>
                     <span th:text="${teacherInfo.major}">컴퓨터공학과</span></strong>
                 <h4 style="font-weight: 200">
-                    <!--
-                    <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${teacherInfo.account.getName()}">이름: 김홍익</p>
-                    <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${teacherInfo.account.getPhoneNumber()}">연락처:
+
+                    <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${teacherInfo.account?.name}">이름: 김홍익</p>
+                    <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${teacherInfo.account?.phoneNumber}">
+                        연락처:
                         01012345678</p>
-                    -->
+
                 </h4>
                 <h5 style="font-weight: 800">
                     <p th:text="'지역: ' + ${teacherInfo.area}">지역: 서울</p>
@@ -79,24 +80,25 @@
                     <span th:text="${studentInfo.admission}">고등학교 3학년</span></strong>
                 <h4 style="font-weight: 200">
 
-                  <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${studentInfo.account?.name}">이름: 김홍익</p>
-                  <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${studentInfo.account?.phoneNumber}">연락처:
-                      01012345678</p>
+                    <p class="badge rounded-pill bg-primary" th:text="'이름: ' + ${studentInfo.account?.name}">이름: 김홍익</p>
+                    <p class="badge rounded-pill bg-primary" th:text="'연락처: ' + ${studentInfo.account?.phoneNumber}">
+                        연락처:
+                        01012345678</p>
 
-              </h4>
-              <h5 style="font-weight: 800">
-                  <p th:text="'지역: ' + ${studentInfo.area}">지역: 서울</p>
-                  <p th:text="'성향: ' + ${studentInfo.teacherStyle}">성향: 열정적인</p>
-                  <p th:text="'과목: ' + ${studentInfo.subject}">과목: 국어</p>
-                  <p th:text="'시급: ' + ${studentInfo.money}">시급: 1만원 대</p>
-              </h5>
-          </div>
-      </div>
-  </div>
+                </h4>
+                <h5 style="font-weight: 800">
+                    <p th:text="'지역: ' + ${studentInfo.area}">지역: 서울</p>
+                    <p th:text="'성향: ' + ${studentInfo.teacherStyle}">성향: 열정적인</p>
+                    <p th:text="'과목: ' + ${studentInfo.subject}">과목: 국어</p>
+                    <p th:text="'시급: ' + ${studentInfo.money}">시급: 1만원 대</p>
+                </h5>
+            </div>
+        </div>
+    </div>
 </div>
 
-<a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'"
- th:onClick="|location.href='@{auth/login}'|">로그아웃</a>
+<a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='../../auth/login'"
+   th:onClick="|location.href='@{../../auth/login}'|">로그아웃</a>
 
 
 </body>
