@@ -23,6 +23,7 @@ public class TeacherService {
 
     private final TeacherRepository teacherRepository;
 
+    public String currentStudentEmail;
     private final ConnectionRepository connectionRepository;
 
     public Teacher saveTeacher(Teacher teacher) {
@@ -49,20 +50,22 @@ public class TeacherService {
 
         Connection connection = connectionRepository.findByStudentEmail(teacherReplyDto.getStudentEmail());
         connection.setTeacherReply(teacherReplyDto.getTeacherReply());
+        currentStudentEmail=teacherReplyDto.getStudentEmail();
 
     }
 
     public Teacher getTeacherInfo(String teacherEmail){
-        Teacher teacher=teacherRepository.findByEmail(teacherEmail);
+        Teacher teacher=teacherRepository.findByTeacherEmail(teacherEmail);
         return teacher;
     }
 
-
     public Student getStudentInfo(String teacherEmail){
-        List<Connection> connection= connectionRepository.findByTeacherEmail(teacherEmail);
-        Student student=studentRepository.findByEmail(connection.get(0).getStudentEmail());
+
+        Student student=studentRepository.findByStudentEmail(currentStudentEmail);
+
         return student;
     }
+
 
 
 

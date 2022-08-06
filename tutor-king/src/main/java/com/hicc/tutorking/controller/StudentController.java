@@ -68,9 +68,9 @@ public class StudentController {
         studentService.suggest(studentEmail);
 
         List<Teacher> teachers = studentService.getTeacherList();
-        model.addAttribute("teachers", teachers);//TODO:프론트엔드에 학생 인포에 맞는 선생님 리스트가 넘어감
+        model.addAttribute("teachers", teachers);
 
-        model.addAttribute("connectionDto", new ConnectionDto());//TODO:프론트엔드가 학생이 고른 선생님의 이메일을 백엔드로 줌
+        model.addAttribute("connectionDto", new ConnectionDto());
         return "student/student_matching";
     }
 
@@ -93,7 +93,7 @@ public class StudentController {
             return "student/student_matching";
         }
 
-        return "redirect:/students/connections"; //student 페이지 메인으로 돌아간다
+        return "redirect:/students/connections";
     }
 
     @GetMapping(value = "/connections/checks")
@@ -114,6 +114,26 @@ public class StudentController {
         }
 
         return "/student/student_waiting";
+    }
+
+    @GetMapping(value = "/connections/success")
+    public String studentMatchingSuccess(Principal principal, Model model) {
+        String studentEmail = principal.getName();
+        Teacher teacherInfo = studentService.getTeacherInfo(studentEmail);
+        Student studentInfo = studentService.getStudentInfo(studentEmail);
+        model.addAttribute("teacherInfo", teacherInfo);
+        model.addAttribute("studentInfo", studentInfo);
+        return "connect/connect_success";
+    }
+
+    @GetMapping(value = "/connections/fail")
+    public String studentMatchingFail(Principal principal, Model model) {
+        String studentEmail = principal.getName();
+        Teacher teacherInfo = studentService.getTeacherInfo(studentEmail);
+        Student studentInfo = studentService.getStudentInfo(studentEmail);
+        model.addAttribute("teacherInfo", teacherInfo);
+        model.addAttribute("studentInfo", studentInfo);
+        return "student/student_failed";
     }
 
 

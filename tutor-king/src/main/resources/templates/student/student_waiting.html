@@ -83,11 +83,11 @@
 <a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'"
    href="/auth/logout">로그아웃</a>
 
-<div th:if="${connection == false}">
-    <meta http-equiv="refresh" content="0;url=./student_failed.html">
+<div th:if="${#strings.equals(connection.teacherReply,'거절')}" >
+    <meta http-equiv="refresh" content="0;url=/students/connections/fail">
 </div>
-<div th:unless="${connection == true}">
-    <meta http-equiv="refresh" content="0;url=../connect/connect_success.html">
+<div th:if="${#strings.equals(connection.teacherReply,'수락')}">
+    <meta http-equiv="refresh" content="0;url=/students/connections/success">
 </div>
 
 </body>

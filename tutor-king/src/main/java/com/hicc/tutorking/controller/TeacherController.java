@@ -78,34 +78,28 @@ public class TeacherController {
             return "teacher/teacher_matching";
         }
 
-        return "redirect:/teachers/connections";
+        if(teacherReplyDto.getTeacherReply().equals("수락"))
+        {
+            return "redirect:/teachers/connections/success";}
+        else if (teacherReplyDto.getTeacherReply().equals("거절")) {
+            model.addAttribute("errorMessage", "거절했습니다.");
+            return "teacher/teacher_matching";
+        }
+        return "teacher/teacher_matching";
 
     }
 
     @GetMapping(value="/connections/success")
     public String teacherMatchingSuccess(Principal principal, Model model){
         String teacherEmail= principal.getName();
-        teacherService.getTeacherInfo(teacherEmail);
-        teacherService.getStudentInfo(teacherEmail);
+        Teacher teacherInfo=teacherService.getTeacherInfo(teacherEmail);
+        Student studentInfo=teacherService.getStudentInfo(teacherEmail);
+        model.addAttribute("teacherInfo",teacherInfo);
+        model.addAttribute("studentInfo",studentInfo);
         return "connect/connect_success";
     }
 
-    //String ShowStudentNumber(teacherReplyDto)
 
-    //TODO: !!!프론트엔드!!!
-    // 선생님 버전; 선생님한테 매칭을 요청한 학생들의 정보와 이메일을 백엔드가 프론트에게 줌.("StudentWhoAskedInfo","EmailStudentWhoAsked")
-    // 프론트엔드에서 그 리스트에서 각 학생들 정보 꺼내서 프론트엔드에 보이게 하는 것,
-    // 선생님이 수락/거절한 학생의 이메일과 수락했는지 거절했는지의 여부를
-    // teacherReplyDto를 통해 백엔드에 보내줘야 함
-
-    //TODO: !!!프론트엔드!!!
-    // 학생 버전;  학생의 info 에 맞는 선생님들의 리스트를 백엔드가 보내줌("teachers"로 보내줌)
-    // 리스트에서 각각 선생님들 정보를 꺼내서 프론트에 보이게 하는 것
-    //  프론트엔드에서 사용자가 선생님을 선택한다. 그 선택한 선생님의 이메일을 ConnectionDto를 통해서 백엔드에게 전달해줘야함 *
-
-
-
-    //TODO:프론트엔드에서 선생님은 학생 수락이나 거절이나 버튼 누르면 그 버튼들을 다신 못 누르게 했으면 좋겠습니당
 
 
 

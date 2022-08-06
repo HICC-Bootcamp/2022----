@@ -37,22 +37,22 @@
     <hr class="col-3">
 </div>
 
-<form th:action="@{}" method="post" th:object="${connectionDto}">
+
     <div class="row justify-content-center">
         <div class="col-3">
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-400 position-relative">
                 <div class="col p-3 d-flex flex-column position-static">
                     <strong class="d-inline-block mb-2 text-primary">
-                        <span th:text="${Teacher.university}">홍익대학교</span>
-                        <span th:text="${Teacher.major}"></span>컴퓨터공학과</strong>
+                        <span th:text="${teacherInfo.university}">홍익대학교</span>
+                        <span th:text="${teacherInfo.major}">컴퓨터공학과</span></strong>
                     <h5 style="font-weight: 800">
-                        <p th:text="'지역: ' + ${Teacher.area}">지역: 서울</p>
-                        <p th:text="'나이: ' + ${Teacher.age}">나이: 27세</p>
-                        <p th:text="'성향: ' + ${Teacher.style}">성향: 열정적인</p>
-                        <p th:text="'과목: ' + ${Teacher.subject}">과목: 국어</p>
-                        <p th:text="'시급: ' + ${Teacher.wage}">시급: 20000원</p>
+                        <p th:text="'지역: ' + ${teacherInfo.area}">지역: 서울</p>
+                        <p th:text="'나이: ' + ${teacherInfo.age}">나이: 27세</p>
+                        <p th:text="'성향: ' + ${teacherInfo.style}">성향: 열정적인</p>
+                        <p th:text="'과목: ' + ${teacherInfo.subject}">과목: 국어</p>
+                        <p th:text="'시급: ' + ${teacherInfo.wage}">시급: 20000원</p>
                     </h5>
-                    <p class="card-text" th:text="${Teacher.experience}" style="font-weight: 800">
+                    <p class="card-text" th:text="${teacherInfo.experience}" style="font-weight: 800">
                         경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개 경력 및 자기소개
                     </p>
                 </div>
@@ -68,19 +68,19 @@
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-400 position-relative">
                 <div class="col p-3 d-flex flex-column position-static">
                     <strong class="d-inline-block mb-2 text-primary">
-                        <span th:text="${Student.grade}"></span>고등학교 3학년</strong>
+                        <span th:text="${studentInfo.admission}">고등학교 3학년</span></strong>
                     <h5 style="font-weight: 800">
-                        <p th:text="'지역: ' + ${Student.area}">지역: 서울</p>
-                        <p th:text="'성향: ' + $Student.style}">성향: 열정적인</p>
-                        <p th:text="'과목: ' + ${Student.subject}">과목: 국어</p>
-                        <p th:text="'시급: ' + ${Student.money}">시급: 1만원 대</p>
+                        <p th:text="'지역: ' + ${studentInfo.area}">지역: 서울</p>
+                        <p th:text="'성향: ' + ${studentInfo.teacherStyle}">성향: 열정적인</p>
+                        <p th:text="'과목: ' + ${studentInfo.subject}">과목: 국어</p>
+                        <p th:text="'시급: ' + ${studentInfo.money}">시급: 1만원 대</p>
                     </h5>
                 </div>
             </div>
         </div>
     </div>
-</form>
+
 <a class="mb-3 text-muted text-center fixed-bottom" onClick="location.href='auth/login'"
-   th:onClick="|location.href='@{auth/login'}'|">로그아웃</a>
+   th:onClick="|location.href='@{../../auth/login}'|">로그아웃</a>
 </body>
 </html>
